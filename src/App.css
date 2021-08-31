@@ -1,15 +1,27 @@
+/* - - - - - - - MAIN - - - - - - -  */
+.main-container {
+    display: flex;
+    justify-content: space-around;
+}
+
 /* - - - - - - - HEADER - - - - - - -  */
 header {
     height: 150px;
     display: flex;
     justify-content: space-around;
 }
+header h1 {
+    margin: auto 20px;
+}
+header button {
+    height: 50px;
+    margin: auto 20px;
+}
 
 /* - - - - - - - CALENDAR - - - - - - -  */
 .calendar-container {
-    width: 70%;
+    width: 65%;
 }
-
 .weekdays-container {
     width: 100%;
     display: flex;
@@ -35,7 +47,15 @@ header {
     border: 1px solid black;
     margin: 1%;
 }
-
+.currentday {
+    background-color: coral;
+}
 .empty {
     background-color: rgb(150, 150, 150);
+}
+
+/* - - - - - - - ASIDE - - - - - - -  */
+.today-container {
+    width: 30%;
+    border: 1px solid black;
 }

@@ -1,7 +1,6 @@
 import moment from 'moment';
 import React from 'react';
 import Days from './Days';
-import EmptyDays from './EmptyDays';
 
 moment.updateLocale('sv', {
     week: {
@@ -11,18 +10,15 @@ moment.updateLocale('sv', {
 
 function Calendar(days) {
     let currentDays = days.days;
-    let emptyDays = days.firstDayOfMonth;
-    let weekdayshort = moment.weekdaysShort(true);
-    console.log(days);
 
-    // HELP
+    let emptyDays = days.firstDayOfMonth;
+    let parseDays = parseInt(emptyDays, 10);
     let blanks = [];
-    for (let i = 0; i < emptyDays; i++) {
+    for (let i = 0; i < parseDays; i++) {
         blanks.push(i);
     }
-    console.log(blanks);
-    // HELP
 
+    let weekdayshort = moment.weekdaysShort(true);
     const weekdayshortname = weekdayshort.map((day) => {
         return (
             <div className='weekdays-day_cont' key={day}>
@@ -31,18 +27,24 @@ function Calendar(days) {
         );
     });
 
+    const clickedDay = (answer) => {
+        days.clickedDay(answer);
+    };
+
     return (
         <section className='calendar-container'>
             <div className='weekdays-container'>{weekdayshortname}</div>
             <div className='days-container'>
-                {/* HELP  */}
-                {blanks.map((blank) => (
-                    <EmptyDays key={blank} blank={blank} />
+                {blanks.map((blank, i) => (
+                    <div key={i} className='days-day_cont empty'></div>
                 ))}
-                {/* HELP  */}
-
                 {currentDays.map((day) => (
-                    <Days key={day} day={day} />
+                    <Days
+                        key={days.month + day}
+                        month={days.month}
+                        day={day}
+                        clickedDay={clickedDay}
+                    />
                 ))}
             </div>
         </section>

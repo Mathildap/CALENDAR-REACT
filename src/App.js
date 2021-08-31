@@ -2,8 +2,8 @@ import moment from 'moment';
 import { useState, useEffect } from 'react';
 import './App.css';
 import Calendar from './components/Calendar';
-import EmptyDays from './components/EmptyDays';
 import Header from './components/Header';
+import Today from './components/Today';
 
 moment.updateLocale('sv', {
     week: {
@@ -13,7 +13,7 @@ moment.updateLocale('sv', {
 
 function App() {
     // - - - - -  - -  GET / CHANGE MONTH - - - -  - - - //
-    let currentMonth = moment().format('MMMM');
+    let currentMonth = moment().format('MMMM YYYY');
     let [month, setMonth] = useState(currentMonth);
     const changeMonth = (changeMonth) => {
         if (changeMonth === 'back') {
@@ -26,12 +26,16 @@ function App() {
     };
 
     let minusMonth = (cMonth) => {
-        let monthDate = moment(cMonth, 'MMMM').add(-1, 'month').format('MMMM');
+        let monthDate = moment(cMonth, 'MMMM YYYY')
+            .add(-1, 'month')
+            .format('MMMM YYYY');
         return monthDate;
     };
 
     let plusMonth = (cMonth) => {
-        let monthDate = moment(cMonth, 'MMMM').add(1, 'month').format('MMMM');
+        let monthDate = moment(cMonth, 'MMMM YYYY')
+            .add(1, 'month')
+            .format('MMMM YYYY');
         return monthDate;
     };
 
@@ -64,10 +68,31 @@ function App() {
         getEmptyDays();
     }, [month]);
 
+    // - - - - -  - -  CHOOSED DAY - - - -  - - - //
+    let today = moment().format('DD MMMM');
+    let findId = moment().format('MMMM YYYY DD');
+    let [clickedDay, setClickedDay] = useState(today);
+    console.log(findId);
+    window.onload = function () {
+        document.getElementById(findId).classList.add('currentday');
+    };
+
+    const choosedDay = (answer) => {
+        setClickedDay(answer.date + ' ' + answer.mon);
+    };
+
     return (
         <main>
             <Header month={month} changeMonth={changeMonth} />
-            <Calendar days={days} firstDayOfMonth={emptyDays} />
+            <section className='main-container'>
+                <Calendar
+                    month={month}
+                    days={days}
+                    firstDayOfMonth={emptyDays}
+                    clickedDay={choosedDay}
+                />
+                <Today clickedDay={clickedDay} />
+            </section>
         </main>
     );
 }
