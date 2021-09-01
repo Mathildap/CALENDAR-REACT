@@ -2,6 +2,7 @@ import React from 'react';
 
 function Days(day) {
     let month = day.month;
+    let dy = day.day;
 
     const clickedDay = (e) => {
         let id = e.target.id;
@@ -11,12 +12,20 @@ function Days(day) {
         let theDay = { date: date, year: year, mon: mon, id: e.target.id };
 
         day.clickedDay(theDay);
+        day.colorDayHandler(id);
+    };
+
+    const onMouseDown = (e) => {
+        document.querySelectorAll('*').forEach(function (node) {
+            node.classList.remove('clickedday');
+        });
     };
 
     return (
         <div
+            onMouseDown={onMouseDown}
             onClick={clickedDay}
-            id={month + ' ' + '' + day.day}
+            id={month + ' ' + dy}
             className='days-day_cont'
         >
             {day.day}

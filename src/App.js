@@ -3,7 +3,10 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import Calendar from './components/Calendar';
 import Header from './components/Header';
+import NewTodo from './components/NewTodo';
 import Today from './components/Today';
+
+const HOLIDAY_API = 'https://svenskahelgdagar.info/v2/GET /year/{2021}';
 
 moment.updateLocale('sv', {
     week: {
@@ -12,6 +15,12 @@ moment.updateLocale('sv', {
 });
 
 function App() {
+    // fetch(HOLIDAY_API)
+    //     .then((resp) => resp.json())
+    //     .then((data) => {
+    //         console.log(data);
+    //     });
+
     // - - - - -  - -  GET / CHANGE MONTH - - - -  - - - //
     let currentMonth = moment().format('MMMM YYYY');
     let [month, setMonth] = useState(currentMonth);
@@ -68,18 +77,43 @@ function App() {
         getEmptyDays();
     }, [month]);
 
+    useEffect(() => {
+        if (month === moment().format('MMMM YYYY')) {
+            const timer = setTimeout(() => {
+                let findId = moment().format('MMMM YYYY DD');
+                let element = document.getElementById(findId);
+                element.classList.add('currentday');
+            }, 100);
+            return () => clearTimeout(timer);
+        }
+    }, [month]);
+
     // - - - - -  - -  CHOOSED DAY - - - -  - - - //
     let today = moment().format('DD MMMM');
-    let findId = moment().format('MMMM YYYY DD');
     let [clickedDay, setClickedDay] = useState(today);
-    console.log(findId);
-    window.onload = function () {
-        document.getElementById(findId).classList.add('currentday');
-    };
+    let [newTodoDay, setNewTodoDay] = useState(moment().format('DD-MM-YYYY'));
 
     const choosedDay = (answer) => {
+        let formatDate = moment(month, 'MMMM').format('MM');
+        setNewTodoDay(answer.date + '-' + formatDate + '-' + answer.year);
         setClickedDay(answer.date + ' ' + answer.mon);
     };
+
+    // - - - - -  - -  NEW TODO - - - -  - - - //
+    let [inputText, setInputText] = useState([]);
+
+    const inputToDo = (todo) => {
+        let saveTodo = {
+            text: todo.text,
+            time: todo.time,
+            date: newTodoDay,
+        };
+        setInputText(saveTodo);
+    };
+
+    useEffect(() => {
+        console.log(inputText);
+    }, [inputText]);
 
     return (
         <main>
@@ -91,7 +125,10 @@ function App() {
                     firstDayOfMonth={emptyDays}
                     clickedDay={choosedDay}
                 />
-                <Today clickedDay={clickedDay} />
+                <aside>
+                    <Today clickedDay={clickedDay} />
+                    <NewTodo clickedDay={clickedDay} inputToDo={inputToDo} />
+                </aside>
             </section>
         </main>
     );

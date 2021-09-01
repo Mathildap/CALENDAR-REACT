@@ -50,12 +50,19 @@ header button {
 .currentday {
     background-color: coral;
 }
+.clickedday {
+    background-color: cadetblue;
+}
 .empty {
     background-color: rgb(150, 150, 150);
 }
 
 /* - - - - - - - ASIDE - - - - - - -  */
-.today-container {
+aside {
     width: 30%;
     border: 1px solid black;
 }
+/* .today-container {
+    width: 30%;
+    border: 1px solid black;
+} */

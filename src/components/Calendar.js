@@ -1,5 +1,5 @@
 import moment from 'moment';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Days from './Days';
 
 moment.updateLocale('sv', {
@@ -31,6 +31,20 @@ function Calendar(days) {
         days.clickedDay(answer);
     };
 
+    let [colorDay, setColorDay] = useState('');
+    const colorDayHandler = (id) => {
+        setColorDay(id);
+    };
+
+    useEffect(() => {
+        if (colorDay === '') {
+            return;
+        } else {
+            let elem = document.getElementById(colorDay);
+            elem.classList.add('clickedday');
+        }
+    }, [colorDay]);
+
     return (
         <section className='calendar-container'>
             <div className='weekdays-container'>{weekdayshortname}</div>
@@ -44,6 +58,7 @@ function Calendar(days) {
                         month={days.month}
                         day={day}
                         clickedDay={clickedDay}
+                        colorDayHandler={colorDayHandler}
                     />
                 ))}
             </div>
