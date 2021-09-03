@@ -54,11 +54,12 @@ function Calendar(days) {
                 ))}
                 {currentDays.map((day) => (
                     <Days
-                        key={days.month + day}
-                        month={days.month}
+                        key={days.monthInNr + day}
+                        month={days.monthInNr}
                         day={day}
                         clickedDay={clickedDay}
                         colorDayHandler={colorDayHandler}
+                        todos={days.todos}
                     />
                 ))}
             </div>

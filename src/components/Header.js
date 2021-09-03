@@ -1,4 +1,5 @@
 import React from 'react';
+import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 
 function Header(month) {
     const back = () => {
@@ -11,13 +12,17 @@ function Header(month) {
 
     return (
         <header>
-            <button type='submit' onClick={back} className='header-arrow'>
-                ←
-            </button>
+            <BiChevronLeft
+                type='submit'
+                onClick={back}
+                className='header-arrow'
+            />
             <h1>{month.month}</h1>
-            <button type='submit' onClick={forward} className='header-arrow'>
-                →
-            </button>
+            <BiChevronRight
+                type='submit'
+                onClick={forward}
+                className='header-arrow'
+            />
         </header>
     );
 }

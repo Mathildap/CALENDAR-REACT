@@ -17,9 +17,9 @@ function NewTodo(day) {
 
         e.preventDefault();
         day.inputToDo(sendInfo);
-        day.inputToDo(sendInfo);
         setChange('');
         setTime();
+        document.getElementById('appt').value = '';
     };
 
     return (
@@ -31,6 +31,8 @@ function NewTodo(day) {
                     value={change}
                     placeholder='New Todo'
                     id='newTodoInput'
+                    maxLength='20'
+                    required
                 />
                 <input
                     type='time'
@@ -39,7 +41,7 @@ function NewTodo(day) {
                     onChange={timeHandler}
                 />
                 <button type='submit' id='newTodoBtn'>
-                    Add
+                    +
                 </button>
             </form>
         </div>
