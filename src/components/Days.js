@@ -2,7 +2,13 @@ import moment from 'moment';
 import React from 'react';
 
 function Days({ day, month, clickedDay, colorDayHandler, todos }) {
-    let formatDate = moment(day, 'DD-MM-YYYY').format('D');
+    let formatDate;
+
+    if (day === '31') {
+        formatDate = 31;
+    } else {
+        formatDate = moment(day, 'DD-MM-YYYY').format('D');
+    }
 
     const clickedDayy = (e) => {
         if (e.target.id.length === 10) {
@@ -47,13 +53,13 @@ function Days({ day, month, clickedDay, colorDayHandler, todos }) {
                 id={id}
                 className='days-day_cont'
             >
-                {formatDate}
+                <h3>{formatDate}</h3>
                 {todos
                     .filter((todo) => todo.date === id)
                     .map((todo) => {
                         totalTodos++;
                         return (
-                            <div className='inline' key={todo._id}>
+                            <div className='inline day-todo' key={todo._id}>
                                 ・{todo.text}
                             </div>
                         );

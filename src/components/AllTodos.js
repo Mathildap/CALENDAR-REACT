@@ -11,8 +11,8 @@ function AllTodos({ todos, onDelete, onToggle }) {
                 <h1>All Todos</h1>
                 {todos
                     .sort((a, b) =>
-                        new moment(b.date).format('DD-MM-YYYY') <
-                        new moment(a.date).format('DD-MM-YYYY')
+                        moment(b.date, 'DD-MM-YYYY') <
+                        moment(a.date, 'DD-MM-YYYY')
                             ? 1
                             : -1
                     )

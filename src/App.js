@@ -113,6 +113,7 @@ function App() {
 
     // - - - - -  - -  TODOs - - - -  - - - //
     let [todos, setTodos] = useState();
+    let [savedTodo, setSavedTodo] = useState();
 
     // POST NEW TODO TO DB
     const sendTodo = (todo) => {
@@ -122,6 +123,8 @@ function App() {
             date: newTodoDay,
         };
 
+        setSavedTodo(saveTodo);
+
         fetch('http://localhost:3001/new', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
@@ -129,30 +132,19 @@ function App() {
         })
             .then((resp) => resp.json())
             .then((jsonRes) => {});
-
-        fetch('http://localhost:3001/get')
-            .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                }
-            })
-            .then((jsonRes) => setTodos(jsonRes));
     };
 
     // GET TODOS FROM DB
-    const getTodos = () => {
+    useEffect(() => {
         fetch('http://localhost:3001/get')
             .then((res) => {
                 if (res.ok) {
                     return res.json();
                 }
             })
-            .then((jsonRes) => setTodos(jsonRes));
-    };
 
-    useEffect(() => {
-        getTodos();
-    }, []);
+            .then((jsonRes) => setTodos(jsonRes));
+    }, [savedTodo]);
 
     // - - - - -  - -  ALL TODOs - - - -  - - - //
     // DELETE TASK
