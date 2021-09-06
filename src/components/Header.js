@@ -1,7 +1,10 @@
+import moment from 'moment';
 import React from 'react';
 import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 
 function Header(month) {
+    let formatMonth = moment(month.month, 'MM-YYYY').format('MMMM YYYY');
+
     const back = () => {
         month.changeMonth('back');
     };
@@ -17,7 +20,7 @@ function Header(month) {
                 onClick={back}
                 className='header-arrow'
             />
-            <h1>{month.month}</h1>
+            <h1>{formatMonth}</h1>
             <BiChevronRight
                 type='submit'
                 onClick={forward}

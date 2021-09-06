@@ -57,6 +57,7 @@ function Calendar(days) {
                         key={days.monthInNr + day}
                         month={days.monthInNr}
                         day={day}
+                        api={days.api}
                         clickedDay={clickedDay}
                         colorDayHandler={colorDayHandler}
                         todos={days.todos}

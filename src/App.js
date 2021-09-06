@@ -7,8 +7,6 @@ import Header from './components/Header';
 import NewTodo from './components/NewTodo';
 import Today from './components/Today';
 
-// const HOLIDAY_API = 'https://svenskahelgdagar.info/v2/GET /year/{2021}';
-
 moment.updateLocale('sv', {
     week: {
         dow: 1,
@@ -17,28 +15,24 @@ moment.updateLocale('sv', {
 
 function App() {
     // - - - - -  - -  GET / CHANGE MONTH - - - -  - - - //
-    let currentMonth = moment().format('MMMM YYYY');
-    let [month, setMonth] = useState(currentMonth);
-    let [monthInNr, setMonthInNr] = useState(
-        moment(month, 'MMMM').format('MM-YYYY')
-    );
+    let [monthInNr, setMonthInNr] = useState(moment().format('MM-YYYY'));
 
     // CHANGE MONTH
     const changeMonth = (changeMonth) => {
         if (changeMonth === 'back') {
-            let newMonth = minusMonth(month);
-            setMonth(newMonth);
+            let newMonth = minusMonth(monthInNr);
+            setMonthInNr(newMonth);
         } else if (changeMonth === 'forward') {
-            let newMonth = plusMonth(month);
-            setMonth(newMonth);
+            let newMonth = plusMonth(monthInNr);
+            setMonthInNr(newMonth);
         }
     };
 
     let minusMonth = (cMonth) => {
-        let monthDate = moment(cMonth, 'MMMM YYYY')
+        let monthDate = moment(cMonth, 'MM-YYYY')
             .add(-1, 'month')
-            .format('MMMM YYYY');
-        let monthNr = moment(month, 'MMMM YYYY')
+            .format('MM-YYYY');
+        let monthNr = moment(monthInNr, 'MM-YYYY')
             .add(-1, 'month')
             .format('MM-YYYY');
         setMonthInNr(monthNr);
@@ -46,15 +40,33 @@ function App() {
     };
 
     let plusMonth = (cMonth) => {
-        let monthDate = moment(cMonth, 'MMMM YYYY')
+        let monthDate = moment(cMonth, 'MM-YYYY')
             .add(1, 'month')
-            .format('MMMM YYYY');
-        let monthNr = moment(month, 'MMMM YYYY')
+            .format('MM-YYYY');
+        let monthNr = moment(monthInNr, 'MM-YYYY')
             .add(1, 'month')
             .format('MM-YYYY');
         setMonthInNr(monthNr);
         return monthDate;
     };
+
+    // - - - - -  - -  FETCH HOLIDAY API - - - -  - - - //
+    let [apiYear, setApiYear] = useState(monthInNr.slice(-4));
+    let [api, setApi] = useState([]);
+    let HOLIDAY_API = '';
+    let useMonth;
+
+    useEffect(() => {
+        useMonth = monthInNr.slice(0, 2);
+        setApiYear(monthInNr.slice(-4));
+        HOLIDAY_API +=
+            'https://sholiday.faboul.se/dagar/v2.1/' + apiYear + '/' + useMonth;
+        fetch(HOLIDAY_API)
+            .then((resp) => resp.json())
+            .then((data) => {
+                setApi(data.dagar);
+            });
+    }, [monthInNr]);
 
     // - - - - -  - -  GET / CHANGE DAYS - - - -  - - - //
     let [days, setDays] = useState([]);
@@ -63,9 +75,9 @@ function App() {
     // GET DAYS BY MONTH
     const getDaysArrayByMonth = () => {
         const currentMonthDates = Array.from(
-            { length: moment(month, 'MMMM').daysInMonth() },
+            { length: moment(monthInNr, 'MM').daysInMonth() },
             (x, i) =>
-                moment(month, 'MMMM')
+                moment(monthInNr, 'MM')
                     .startOf('month')
                     .add(i, 'days')
                     .format('DD')
@@ -75,7 +87,7 @@ function App() {
 
     // GET WHICH DAY THE MONTH BEGINS
     const getEmptyDays = () => {
-        let firstDay = moment(month, 'MMMM')
+        let firstDay = moment(monthInNr, 'MM')
             .startOf('month')
             .add(-1, 'days')
             .format('d');
@@ -86,24 +98,11 @@ function App() {
     useEffect(() => {
         getDaysArrayByMonth();
         getEmptyDays();
-    }, [month]);
+    }, [monthInNr]);
 
     // - - - - -  - -  CHOOSED DAY - - - -  - - - //
-    let today = moment().format('DD-MM-YYYY');
-    let [clickedDay, setClickedDay] = useState(today);
+    let [clickedDay, setClickedDay] = useState(moment().format('DD-MM-YYYY'));
     let [newTodoDay, setNewTodoDay] = useState(moment().format('DD-MM-YYYY'));
-
-    // COLOR TODAYS CONTAINER
-    useEffect(() => {
-        if (month === moment().format('MMMM YYYY')) {
-            const timer = setTimeout(() => {
-                let findId = moment().format('DD-MM-YYYY');
-                let element = document.getElementById(findId);
-                element.classList.add('currentday');
-            }, 500);
-            return () => clearTimeout(timer);
-        }
-    }, [month]);
 
     // SET CLICKED DAY
     const choosedDay = (answer) => {
@@ -111,7 +110,7 @@ function App() {
         setClickedDay(answer.id);
     };
 
-    // - - - - -  - -  TODOs - - - -  - - - //
+    // - - - - -  - -  TODOS - - - -  - - - //
     let [todos, setTodos] = useState();
     let [savedTodo, setSavedTodo] = useState();
 
@@ -121,6 +120,7 @@ function App() {
             text: todo.text,
             time: todo.time,
             date: newTodoDay,
+            done: false,
         };
 
         setSavedTodo(saveTodo);
@@ -146,8 +146,7 @@ function App() {
             .then((jsonRes) => setTodos(jsonRes));
     }, [savedTodo]);
 
-    // - - - - -  - -  ALL TODOs - - - -  - - - //
-    // DELETE TASK
+    // DELETE TODO
     const deleteTask = (id) => {
         let todoId = { id };
         fetch('http://localhost:3001/delete', {
@@ -161,23 +160,37 @@ function App() {
             });
     };
 
-    // TOGGLE REMINDER
+    // TOGGLE DONE
     const toggleReminder = (id) => {
-        setTodos(
-            todos.map((todo) =>
-                todo._id === id ? { ...todo, reminder: !todo.reminder } : todo
-            )
-        );
+        let trueOrFalse;
+
+        if (id.done === true) {
+            trueOrFalse = false;
+        } else {
+            trueOrFalse = true;
+        }
+
+        let todoId = { id: id.id, done: trueOrFalse };
+
+        fetch('http://localhost:3001/update', {
+            method: 'post',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify(todoId),
+        })
+            .then((resp) => resp.json())
+            .then((jsonRes) => {
+                setTodos(jsonRes);
+            });
     };
 
     return (
         <main>
-            <Header month={month} changeMonth={changeMonth} />
+            <Header month={monthInNr} changeMonth={changeMonth} />
             <section className='main-container'>
                 <Calendar
-                    month={month}
                     monthInNr={monthInNr}
                     days={days}
+                    api={api}
                     firstDayOfMonth={emptyDays}
                     clickedDay={choosedDay}
                     todos={todos}
@@ -204,5 +217,3 @@ function App() {
 }
 
 export default App;
-
-// TODO

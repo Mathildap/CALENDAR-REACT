@@ -4,7 +4,7 @@ import { BiCheck, BiTrash } from 'react-icons/bi';
 function Todo({ todo, onDelete, onToggle }) {
     return (
         <div className='todo'>
-            <div className={`${todo.reminder ? 'reminder' : ''}`}>
+            <div className={`${todo.done === true ? 'reminder' : ''}`}>
                 <span className='todo-text'>{todo.text}</span>
                 <span className='todo-time_date'>{todo.time}</span>
                 <span className='todo-time_date'>{todo.date}</span>
@@ -15,7 +15,12 @@ function Todo({ todo, onDelete, onToggle }) {
                             cursor: 'pointer',
                             fontSize: '1.1rem',
                         }}
-                        onClick={() => onToggle(todo._id)}
+                        onClick={() =>
+                            onToggle({
+                                id: todo._id,
+                                done: todo.done,
+                            })
+                        }
                     />
                     <BiTrash
                         style={{

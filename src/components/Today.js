@@ -6,7 +6,7 @@ function Today({ clickedDay, todos, onDelete, onToggle }) {
     let formatDate = moment(clickedDay, 'DD-MM-YYYY').format('D MMMM YY');
 
     if (todos === undefined) {
-        return <div></div>;
+        return <div className='aside-container loading'>Loading...</div>;
     } else {
         return (
             <article className='today-todo_container'>
@@ -16,7 +16,9 @@ function Today({ clickedDay, todos, onDelete, onToggle }) {
                     .map((todo) => (
                         <div className='todo' key={todo._id}>
                             <div
-                                className={`${todo.reminder ? 'reminder' : ''}`}
+                                className={`${
+                                    todo.done === true ? 'reminder' : ''
+                                }`}
                             >
                                 {todo.text}
                                 {'  '}
@@ -33,7 +35,12 @@ function Today({ clickedDay, todos, onDelete, onToggle }) {
                                             cursor: 'pointer',
                                             fontSize: '1.1rem',
                                         }}
-                                        onClick={() => onToggle(todo._id)}
+                                        onClick={() =>
+                                            onToggle({
+                                                id: todo._id,
+                                                done: todo.done,
+                                            })
+                                        }
                                     />
                                     <BiTrash
                                         style={{

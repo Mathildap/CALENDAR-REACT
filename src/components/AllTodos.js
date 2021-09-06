@@ -4,7 +4,11 @@ import Todo from './Todo';
 
 function AllTodos({ todos, onDelete, onToggle }) {
     if (todos === undefined) {
-        return <div>No todos!</div>;
+        return (
+            <div className='aside-container alltodos-container loading'>
+                Loading...
+            </div>
+        );
     } else {
         return (
             <div className='aside-container alltodos-container'>

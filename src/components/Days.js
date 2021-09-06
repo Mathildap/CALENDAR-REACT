@@ -1,9 +1,9 @@
 import moment from 'moment';
 import React from 'react';
 
-function Days({ day, month, clickedDay, colorDayHandler, todos }) {
+function Days({ day, api, month, clickedDay, colorDayHandler, todos }) {
     let formatDate;
-
+    let currentDay = moment().format('DD-MM-YYYY');
     if (day === '31') {
         formatDate = 31;
     } else {
@@ -46,14 +46,31 @@ function Days({ day, month, clickedDay, colorDayHandler, todos }) {
     } else {
         let id = day + '-' + month;
         let totalTodos = 0;
+        let apiId = moment(id, 'DD-MM-YYYY').format('YYYY-MM-DD');
+
         return (
             <div
                 onMouseDown={onMouseDown}
                 onClick={clickedDayy}
                 id={id}
-                className='days-day_cont'
+                className={`${
+                    id === currentDay
+                        ? 'days-day_cont currentday'
+                        : 'days-day_cont'
+                }`}
             >
-                <h3>{formatDate}</h3>
+                <h3>
+                    {formatDate}
+                    {api
+                        .filter((a) => a.datum === apiId)
+                        .map((a) => {
+                            return (
+                                <span className='days-api' key={a.datum}>
+                                    {a.helgdag}
+                                </span>
+                            );
+                        })}
+                </h3>
                 {todos
                     .filter((todo) => todo.date === id)
                     .map((todo) => {
@@ -64,8 +81,8 @@ function Days({ day, month, clickedDay, colorDayHandler, todos }) {
                             </div>
                         );
                     })}
-                <div className='inline'>
-                    {totalTodos === 0 ? '' : totalTodos + ' notes'}
+                <div className='days-todo_count'>
+                    {totalTodos === 0 ? '' : totalTodos + ' Todo:'}
                 </div>
             </div>
         );
