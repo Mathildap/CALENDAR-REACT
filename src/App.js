@@ -125,7 +125,7 @@ function App() {
 
         setSavedTodo(saveTodo);
 
-        fetch('https://calendar-mathildap.herokuapp.com/new', {
+        fetch('http://localhost:3001/new', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify(saveTodo),
@@ -136,7 +136,7 @@ function App() {
 
     // GET TODOS FROM DB
     useEffect(() => {
-        fetch('https://calendar-mathildap.herokuapp.com/get')
+        fetch('http://localhost:3001/get')
             .then((res) => {
                 if (res.ok) {
                     return res.json();
@@ -149,7 +149,7 @@ function App() {
     // DELETE TODO
     const deleteTask = (id) => {
         let todoId = { id };
-        fetch('https://calendar-mathildap.herokuapp.com/delete', {
+        fetch('http://localhost:3001/delete', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify(todoId),
@@ -172,7 +172,7 @@ function App() {
 
         let todoId = { id: id.id, done: trueOrFalse };
 
-        fetch('https://calendar-mathildap.herokuapp.com/update', {
+        fetch('http://localhost:3001/update', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify(todoId),
