@@ -4,6 +4,6 @@
 
 ---
 
-Go to https://calendar-frontend-mathildap.herokuapp.com/
+Go to https://calendar-mathildap.herokuapp.com/
 
 You can add, check, and delete todos!
