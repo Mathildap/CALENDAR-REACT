@@ -133,7 +133,10 @@ function App() {
         })
             .then((resp) => resp.json())
             .then((jsonRes) => {});
+    };
 
+    // GET TODOS FROM DB
+    useEffect(() => {
         fetch('https://calendar-mathildap.herokuapp.com/getAll')
             .then((res) => {
                 if (res.ok) {
@@ -142,12 +145,7 @@ function App() {
             })
 
             .then((jsonRes) => setTodos(jsonRes));
-    };
-
-    // GET TODOS FROM DB
-    // useEffect(() => {
-
-    // }, [savedTodo]);
+    }, [savedTodo]);
 
     // DELETE TODO
     const deleteTask = (id) => {
