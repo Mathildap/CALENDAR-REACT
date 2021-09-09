@@ -137,7 +137,7 @@ function App() {
 
     // GET TODOS FROM DB
     useEffect(() => {
-        fetch('https://calendar-mathildap.herokuapp.com/getAll')
+        fetch('https://calendar-mathildap.herokuapp.com/get')
             .then((res) => {
                 if (res.ok) {
                     return res.json();
