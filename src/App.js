@@ -132,7 +132,7 @@ function App() {
             body: JSON.stringify(saveTodo),
         })
             .then((resp) => resp.json())
-            .then((jsonRes) => {});
+            .then((jsonRes) => setTodos(jsonRes));
     };
 
     // GET TODOS FROM DB
