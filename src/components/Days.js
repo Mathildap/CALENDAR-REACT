@@ -1,5 +1,6 @@
 import moment from 'moment';
 import React from 'react';
+import Loading from './Loading';
 
 function Days({ day, api, month, clickedDay, colorDayHandler, todos }) {
     let formatDate;

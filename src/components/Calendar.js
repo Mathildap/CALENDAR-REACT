@@ -1,6 +1,7 @@
 import moment from 'moment';
 import React, { useState, useEffect } from 'react';
 import Days from './Days';
+import Loading from './Loading';
 
 moment.updateLocale('sv', {
     week: {
@@ -52,17 +53,21 @@ function Calendar(days) {
                 {blanks.map((blank, i) => (
                     <div key={i} className='days-day_cont empty'></div>
                 ))}
-                {currentDays.map((day) => (
-                    <Days
-                        key={days.monthInNr + day}
-                        month={days.monthInNr}
-                        day={day}
-                        api={days.api}
-                        clickedDay={clickedDay}
-                        colorDayHandler={colorDayHandler}
-                        todos={days.todos}
-                    />
-                ))}
+                {currentDays !== undefined ? (
+                    currentDays.map((day) => (
+                        <Days
+                            key={days.monthInNr + day}
+                            month={days.monthInNr}
+                            day={day}
+                            api={days.api}
+                            clickedDay={clickedDay}
+                            colorDayHandler={colorDayHandler}
+                            todos={days.todos}
+                        />
+                    ))
+                ) : (
+                    <Loading />
+                )}
             </div>
         </section>
     );

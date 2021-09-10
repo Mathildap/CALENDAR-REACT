@@ -16,7 +16,7 @@ body {
 .login-page {
     margin: 0px;
     padding: 0px;
-    height: 100vh;
+    height: 1200px;
     background-image: linear-gradient(
         to bottom right,
         rgb(248, 173, 129),
@@ -105,7 +105,7 @@ body {
 }
 
 /* - - - - - - - HEADER - - - - - - -  */
-header {
+.header {
     height: 150px;
     display: flex;
     justify-content: space-around;
@@ -126,8 +126,24 @@ header {
         margin: auto 20px;
     }
 }
+.header-username {
+    font-family: 'Lato', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 15px;
+    margin: 10px;
+    color: rgb(248, 141, 129);
+}
+.header-name_btn {
+    display: flex;
+    justify-content: space-between;
+}
 
 /* - - - - - - - CALENDAR - - - - - - -  */
+.loading {
+    margin: auto;
+    margin-top: 40px;
+}
 .calendar-container {
     width: 65%;
     height: 100%;

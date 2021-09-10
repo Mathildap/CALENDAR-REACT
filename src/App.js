@@ -6,6 +6,7 @@ import Calendar from './components/Calendar';
 import Header from './components/Header';
 import NewTodo from './components/NewTodo';
 import Today from './components/Today';
+import Login from './components/Login';
 
 moment.updateLocale('sv', {
     week: {
@@ -14,6 +15,28 @@ moment.updateLocale('sv', {
 });
 
 function App() {
+    // - - - - -  - -  LOGIN - - - -  - - - //
+    let [userName, setUserName] = useState('');
+    let [users, setUsers] = useState([
+        {
+            userId: 1,
+            name: 'Mathilda',
+            email: 'mathilda@mail.com',
+            password: 'test',
+        },
+    ]);
+
+    const userInfo = (info) => {
+        users.forEach((user) => {
+            if (user.email === info.email && user.password === info.password) {
+                let currentUser = user.name;
+                setUserName(currentUser);
+            } else {
+                console.log('wrong login');
+            }
+        });
+    };
+
     // - - - - -  - -  GET / CHANGE MONTH - - - -  - - - //
     let [monthInNr, setMonthInNr] = useState(moment().format('MM-YYYY'));
 
@@ -181,33 +204,50 @@ function App() {
 
     return (
         <main>
-            <Header month={monthInNr} changeMonth={changeMonth} />
-            <section className='main-container'>
-                <Calendar
-                    monthInNr={monthInNr}
-                    days={days}
-                    api={api}
-                    firstDayOfMonth={emptyDays}
-                    clickedDay={choosedDay}
-                    todos={todos}
-                />
-                <aside>
-                    <div className='aside-container'>
-                        <Today
-                            clickedDay={clickedDay}
-                            todos={todos}
-                            onDelete={deleteTask}
-                            onToggle={toggleReminder}
-                        />
-                        <NewTodo clickedDay={clickedDay} inputToDo={sendTodo} />
-                    </div>
-                    <AllTodos
-                        todos={todos}
-                        onDelete={deleteTask}
-                        onToggle={toggleReminder}
+            {userName === '' ? (
+                <Login userInfo={userInfo} />
+            ) : (
+                <>
+                    <Header
+                        month={monthInNr}
+                        changeMonth={changeMonth}
+                        user={userName}
+                        logOut={() => {
+                            setUserName('');
+                        }}
                     />
-                </aside>
-            </section>
+                    <section className='main-container'>
+                        <Calendar
+                            monthInNr={monthInNr}
+                            days={days}
+                            api={api}
+                            firstDayOfMonth={emptyDays}
+                            clickedDay={choosedDay}
+                            todos={todos}
+                        />
+                        <aside>
+                            <div className='aside-container'>
+                                <Today
+                                    clickedDay={clickedDay}
+                                    todos={todos}
+                                    onDelete={deleteTask}
+                                    onToggle={toggleReminder}
+                                />
+                                <NewTodo
+                                    clickedDay={clickedDay}
+                                    inputToDo={sendTodo}
+                                />
+                            </div>
+                            <AllTodos
+                                todos={todos}
+                                onDelete={deleteTask}
+                                onToggle={toggleReminder}
+                            />
+                        </aside>
+                    </section>
+                </>
+            )}
+            ;
         </main>
     );
 }
