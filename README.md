@@ -4,19 +4,12 @@
 
 ---
 
-### Run live
+### Run app live
 
 Go to https://calendar-mathildap.herokuapp.com/
 
-You can add, check, and delete todos!
+| email         | password |
+| ------------- | -------- |
+| test@mail.com | testing  |
 
----
-
-### Clone repo
-
-```
-npm install
-npm start
-```
-
-Open http://localhost:3000 to view it in the browser.
+Add, check, and delete todos!
