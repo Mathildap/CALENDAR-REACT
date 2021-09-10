@@ -6,6 +6,7 @@ import Calendar from './components/Calendar';
 import Header from './components/Header';
 import NewTodo from './components/NewTodo';
 import Today from './components/Today';
+import Login from './components/Login';
 
 moment.updateLocale('sv', {
     week: {
@@ -234,7 +235,7 @@ function App() {
                         month={monthInNr}
                         changeMonth={changeMonth}
                         user={user.userName}
-                        logOut={() => {
+                        logOutHandler={() => {
                             setUser('');
                         }}
                     />
