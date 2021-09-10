@@ -21,7 +21,9 @@ function Header(month) {
         <header>
             <div className='header-name_btn'>
                 <div className='header-username'>{month.user}</div>
-                <button onClick={logOutHandler}>Sign out</button>
+                <button onClick={logOutHandler} className='logOutBtn'>
+                    Sign out
+                </button>
             </div>
             <div className='header'>
                 <BiChevronLeft

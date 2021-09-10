@@ -15,26 +15,38 @@ moment.updateLocale('sv', {
 });
 
 function App() {
-    // - - - - -  - -  LOGIN - - - -  - - - //
-    let [userName, setUserName] = useState('');
-    let [users, setUsers] = useState([
-        {
-            userId: 1,
-            name: 'Mathilda',
-            email: 'mathilda@mail.com',
-            password: 'test',
-        },
-    ]);
+    // - - - - -  - -  LOGIN / USER - - - -  - - - //
+    let [user, setUser] = useState('');
+    let [errorMsg, setErrorMsg] = useState();
 
+    // USER
     const userInfo = (info) => {
-        users.forEach((user) => {
-            if (user.email === info.email && user.password === info.password) {
-                let currentUser = user.name;
-                setUserName(currentUser);
-            } else {
-                console.log('wrong login');
-            }
-        });
+        fetch('https://calendar-backend-mathildap.herokuapp.com/users', {
+            method: 'post',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({ info }),
+        })
+            .then((resp) => resp.json())
+            .then((jsonRes) => {
+                if (jsonRes === 'error') {
+                    setErrorMsg('error');
+                    return;
+                }
+                setUser({ userName: jsonRes.username, id: jsonRes.id });
+            });
+    };
+
+    // NEW USER
+    const newUserInfo = (newUser) => {
+        fetch('https://calendar-backend-mathildap.herokuapp.com/users/new', {
+            method: 'post',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({ newUser }),
+        })
+            .then((resp) => resp.json())
+            .then((jsonRes) => {
+                setUser({ userName: jsonRes.username, id: jsonRes.id });
+            });
     };
 
     // - - - - -  - -  GET / CHANGE MONTH - - - -  - - - //
@@ -141,6 +153,7 @@ function App() {
     // POST NEW TODO TO DB
     const sendTodo = (todo) => {
         let saveTodo = {
+            userId: user.id,
             text: todo.text,
             time: todo.time,
             date: newTodoDay,
@@ -160,14 +173,20 @@ function App() {
 
     // GET TODOS FROM DB
     useEffect(() => {
-        fetch('https://calendar-backend-mathildap.herokuapp.com/get')
+        let userId = user.id;
+
+        fetch('https://calendar-backend-mathildap.herokuapp.com/get', {
+            method: 'post',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({ userId }),
+        })
             .then((res) => res.json())
             .then((jsonRes) => setTodos(jsonRes));
-    }, []);
+    }, [user]);
 
     // DELETE TODO
     const deleteTask = (id) => {
-        let todoId = { id };
+        let todoId = { id: id, userId: user.id };
         fetch('https://calendar-backend-mathildap.herokuapp.com/delete', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
@@ -189,7 +208,7 @@ function App() {
             trueOrFalse = true;
         }
 
-        let todoId = { id: id.id, done: trueOrFalse };
+        let todoId = { id: id.id, done: trueOrFalse, userId: user.id };
 
         fetch('https://calendar-backend-mathildap.herokuapp.com/update', {
             method: 'post',
@@ -204,16 +223,20 @@ function App() {
 
     return (
         <main>
-            {userName === '' ? (
-                <Login userInfo={userInfo} />
+            {user === '' ? (
+                <Login
+                    userInfo={userInfo}
+                    newUserInfo={newUserInfo}
+                    errorMsg={errorMsg}
+                />
             ) : (
                 <>
                     <Header
                         month={monthInNr}
                         changeMonth={changeMonth}
-                        user={userName}
+                        user={user.userName}
                         logOut={() => {
-                            setUserName('');
+                            setUser('');
                         }}
                     />
                     <section className='main-container'>
@@ -247,7 +270,6 @@ function App() {
                     </section>
                 </>
             )}
-            ;
         </main>
     );
 }

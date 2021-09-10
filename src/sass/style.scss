@@ -28,7 +28,7 @@ body {
 }
 #logInContainer,
 #newLogInContainer {
-    width: 50%;
+    width: 40%;
     margin: 35px auto;
     background: #ffffff4d;
     box-shadow: 0 5px 22px 0 #b36b3e5e;
@@ -62,7 +62,7 @@ body {
 #logInBtn,
 #createAccount {
     display: block;
-    margin: 5px auto 15px auto;
+    margin: 10px auto 15px auto;
     border: 0px;
     border-radius: 5px;
     background-color: rgb(242, 106, 113);
@@ -78,6 +78,20 @@ body {
         font-size: 15px;
         margin-left: 5px;
     }
+    &:hover {
+        background-color: rgb(238, 158, 162);
+    }
+}
+.logOutBtn {
+    border: 0px;
+    border-radius: 5px;
+    background-color: rgb(242, 106, 113);
+    color: white;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 0 5px 22px 0 #b36b3e5e;
     &:hover {
         background-color: rgb(238, 158, 162);
     }
@@ -98,7 +112,7 @@ body {
     margin: 0px;
     margin-bottom: 5px;
     text-shadow: 0 5px 22px #b36b3e5e;
-
+    cursor: pointer;
     &:hover {
         color: white;
     }
@@ -212,7 +226,7 @@ body {
 .currentday {
     background-image: linear-gradient(
         to bottom right,
-        rgb(252, 179, 180),
+        rgb(245, 164, 165),
         rgb(241, 136, 139)
     );
     border: 1px solid white;
