@@ -13,16 +13,8 @@ function Header(month) {
         month.changeMonth('forward');
     };
 
-    const logOutHandler = () => {
-        month.logOut('');
-    };
-
     return (
         <header>
-            <div className='header-name_btn'>
-                <div className='header-username'>{month.user}</div>
-                <button onClick={logOutHandler}>Sign out</button>
-            </div>
             <div className='header'>
                 <BiChevronLeft
                     type='submit'

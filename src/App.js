@@ -181,14 +181,7 @@ function App() {
 
     return (
         <main>
-            <Header
-                month={monthInNr}
-                changeMonth={changeMonth}
-                user={userName}
-                logOut={() => {
-                    setUserName('');
-                }}
-            />
+            <Header month={monthInNr} changeMonth={changeMonth} />
             <section className='main-container'>
                 <Calendar
                     monthInNr={monthInNr}
