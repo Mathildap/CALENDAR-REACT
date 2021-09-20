@@ -221,6 +221,16 @@ function App() {
             });
     };
 
+    if (!todos === '') {
+        let draggables = document.querySelector('.draggables');
+
+        draggables.forEach((draggables) => {
+            draggables.addEventListener('dragstart', () => {
+                draggables.classList.add('dragging');
+            });
+        });
+    }
+
     return (
         <main>
             {user === '' ? (

@@ -201,7 +201,7 @@
         }
         .day-todo {
             font-family: 'Lato', sans-serif;
-            font-size: 0.4rem;
+            font-size: 0.3rem;
             color: #4f4f4f;
             position: relative;
             overflow: auto;
@@ -252,7 +252,9 @@
     .inline {
         cursor: pointer;
     }
-
+    .dragging {
+        background-color: red;
+    }
     /* - - - - - - - ASIDE - - - - - - -  */
     aside {
         width: 99%;

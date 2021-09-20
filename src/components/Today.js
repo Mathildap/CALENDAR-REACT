@@ -12,9 +12,14 @@ function Today({ clickedDay, todos, onDelete, onToggle }) {
             <article className='today-todo_container'>
                 <h1>{formatDate}</h1>
                 {todos
+                    .sort((a, b) => (b.time < a.time ? 1 : -1))
                     .filter((todo) => todo.date === clickedDay)
                     .map((todo) => (
-                        <div className='todo' key={todo._id}>
+                        <div
+                            className='draggables todo'
+                            key={todo._id}
+                            draggable='true'
+                        >
                             <div
                                 className={`${
                                     todo.done === true ? 'reminder' : ''

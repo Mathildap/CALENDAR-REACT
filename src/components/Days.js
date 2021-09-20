@@ -72,6 +72,7 @@ function Days({ day, api, month, clickedDay, colorDayHandler, todos }) {
                         })}
                 </h3>
                 {todos
+                    .sort((a, b) => (b.time < a.time ? 1 : -1))
                     .filter((todo) => todo.date === id)
                     .map((todo) => {
                         totalTodos++;
