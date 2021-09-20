@@ -8,8 +8,9 @@
 
 Go to https://calendar-mathildap.herokuapp.com/
 
+#### Test-user:
 | email         | password |
 | ------------- | -------- |
 | test@mail.com | testing  |
 
-Add, check, and delete todos!
+Or create an account. Add, check, and delete your todos!
