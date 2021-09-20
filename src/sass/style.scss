@@ -191,6 +191,7 @@
         position: relative;
         h3 {
             margin: 5px;
+            margin-bottom: 1px;
             font-size: 10px;
             font-family: 'Lato', sans-serif;
             color: rgb(241, 136, 139);
@@ -204,7 +205,7 @@
             font-size: 0.3rem;
             color: #4f4f4f;
             position: relative;
-            overflow: auto;
+            overflow: hidden;
         }
         .days-todo_count {
             display: none;
