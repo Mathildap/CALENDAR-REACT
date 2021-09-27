@@ -7,6 +7,8 @@ import Header from './components/Header';
 import NewTodo from './components/NewTodo';
 import Today from './components/Today';
 import Login from './components/Login';
+import Notes from './components/Notes';
+import NewNote from './components/NewNote';
 
 moment.updateLocale('sv', {
     week: {
@@ -217,19 +219,63 @@ function App() {
         })
             .then((resp) => resp.json())
             .then((jsonRes) => {
-                setTodos(jsonRes);
+                console.log(jsonRes);
             });
     };
 
-    if (!todos === '') {
-        let draggables = document.querySelector('.draggables');
+    // - - - - -  - -  NOTES - - - -  - - - //
+    let [notes, setNotes] = useState();
 
-        draggables.forEach((draggables) => {
-            draggables.addEventListener('dragstart', () => {
-                draggables.classList.add('dragging');
+    // NEW NOTE
+    const newNote = (note) => {
+        let saveNote = {
+            userId: user.id,
+            note: note,
+            done: false,
+        };
+
+        fetch(
+            'https://calendar-backend-mathildap.herokuapp.com/notes/newNote',
+            {
+                method: 'post',
+                headers: { 'Content-type': 'application/json' },
+                body: JSON.stringify(saveNote),
+            }
+        )
+            .then((resp) => resp.json())
+            .then((jsonRes) => {
+                console.log(jsonRes);
+                setNotes(jsonRes);
             });
-        });
-    }
+    };
+
+    // GET NOTES FROM DB
+    useEffect(() => {
+        let userId = user.id;
+
+        fetch('https://calendar-backend-mathildap.herokuapp.com/notes/get', {
+            method: 'post',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({ userId }),
+        })
+            .then((res) => res.json())
+            .then((jsonRes) => setNotes(jsonRes));
+    }, [user]);
+
+    // DELETE NOTE
+    const deleteNote = (id) => {
+        let noteId = { id: id, userId: user.id };
+
+        fetch('https://calendar-backend-mathildap.herokuapp.com/notes/delete', {
+            method: 'post',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify(noteId),
+        })
+            .then((resp) => resp.json())
+            .then((jsonRes) => {
+                setNotes(jsonRes);
+            });
+    };
 
     return (
         <main>
@@ -272,6 +318,10 @@ function App() {
                                     clickedDay={clickedDay}
                                     inputToDo={sendTodo}
                                 />
+                            </div>
+                            <div className='aside-container'>
+                                <Notes notes={notes} onDelete={deleteNote} />
+                                <NewNote newNote={newNote} />
                             </div>
                             <AllTodos
                                 todos={todos}

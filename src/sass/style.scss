@@ -256,6 +256,7 @@
     .dragging {
         background-color: red;
     }
+
     /* - - - - - - - ASIDE - - - - - - -  */
     aside {
         width: 99%;
@@ -303,6 +304,9 @@
             font-size: 20px;
             margin: auto 0px;
         }
+        #newNoteInput {
+            width: 80%;
+        }
     }
 
     /* - - - - - - - TODOS - - - - - - -  */
@@ -348,7 +352,7 @@
     body {
         min-width: 1080px;
         max-width: 2200px;
-        height: 1200px;
+        height: 100%;
         margin: 0 auto;
         overflow: scroll;
         border: 2px solid rgb(248, 173, 129);
@@ -657,6 +661,9 @@
             border-radius: 100px;
             font-size: 20px;
             margin: auto 0px;
+        }
+        #newNoteInput {
+            width: 80%;
         }
     }
 
