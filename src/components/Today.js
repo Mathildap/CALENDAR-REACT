@@ -2,7 +2,7 @@ import moment from 'moment';
 import React from 'react';
 import { BiCheck, BiTrash } from 'react-icons/bi';
 
-function Today({ clickedDay, todos, onDelete, onToggle }) {
+function Today({ clickedDay, todos, onDelete, onToggle, editTodo }) {
     let formatDate = moment(clickedDay, 'DD-MM-YYYY').format('D MMMM YY');
 
     if (todos === undefined) {
@@ -15,15 +15,14 @@ function Today({ clickedDay, todos, onDelete, onToggle }) {
                     .sort((a, b) => (b.time < a.time ? 1 : -1))
                     .filter((todo) => todo.date === clickedDay)
                     .map((todo) => (
-                        <div
-                            className='draggables todo'
-                            key={todo._id}
-                            draggable='true'
-                        >
+                        <div className='todo' key={todo._id}>
                             <div
                                 className={`${
                                     todo.done === true ? 'reminder' : ''
                                 }`}
+                                onClick={() => {
+                                    editTodo(todo);
+                                }}
                             >
                                 {todo.text}
                                 {'  '}

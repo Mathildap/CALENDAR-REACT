@@ -78,7 +78,8 @@ function Days({ day, api, month, clickedDay, colorDayHandler, todos }) {
                         totalTodos++;
                         return (
                             <div className='inline day-todo' key={todo._id}>
-                                ・{todo.text}
+                                <span className='dot'>・</span>
+                                {todo.text}
                             </div>
                         );
                     })}

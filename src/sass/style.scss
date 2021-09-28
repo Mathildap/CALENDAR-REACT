@@ -206,6 +206,10 @@
             color: #4f4f4f;
             position: relative;
             overflow: hidden;
+            margin-left: 4px;
+        }
+        .dot {
+            display: none;
         }
         .days-todo_count {
             display: none;
@@ -305,7 +309,7 @@
             margin: auto 0px;
         }
         #newNoteInput {
-            width: 80%;
+            width: 70%;
         }
     }
 
@@ -344,6 +348,53 @@
         font-family: 'Lato', sans-serif;
         color: white;
         letter-spacing: 0.5px;
+    }
+
+    // EDIT TODO
+    .edit-container {
+        width: 55%;
+        display: inline-block;
+        position: absolute;
+        top: 30%;
+        margin: 0 15%;
+        z-index: 10;
+        padding: 25px;
+        border: 1px solid white;
+        box-shadow: 0 0 25px #cfc6c6;
+        border-radius: 10px;
+        background-image: linear-gradient(
+            to bottom,
+            rgba(248, 173, 129, 0.822),
+            rgba(241, 136, 139, 0.795)
+        );
+        input {
+            font-family: 'Lato', sans-serif;
+            font-size: 14px;
+            letter-spacing: 2px;
+            border: 0;
+            border-radius: 5px;
+            outline: none;
+            padding: 10px 20px;
+            margin: 5px;
+        }
+        #appt {
+            padding: 8px;
+        }
+        button {
+            float: right;
+            border: 0px;
+            border-radius: 5px;
+            background-color: rgb(242, 106, 113);
+            color: white;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 10px;
+            margin: 5px;
+            box-shadow: 0 5px 22px 0 #b36b3e5e;
+            &:hover {
+                background-color: rgb(238, 158, 162);
+            }
+        }
     }
 }
 
@@ -663,7 +714,7 @@
             margin: auto 0px;
         }
         #newNoteInput {
-            width: 80%;
+            width: 70%;
         }
     }
 
@@ -701,5 +752,52 @@
         font-family: 'Lato', sans-serif;
         color: white;
         letter-spacing: 0.5px;
+    }
+
+    // EDIT TODO
+    .edit-container {
+        width: 25%;
+        display: inline-block;
+        position: absolute;
+        top: 30%;
+        margin: 0 35%;
+        z-index: 10;
+        padding: 30px;
+        border: 1px solid white;
+        box-shadow: 0 0 25px #cfc6c6;
+        border-radius: 10px;
+        background-image: linear-gradient(
+            to bottom,
+            rgba(248, 173, 129, 0.822),
+            rgba(241, 136, 139, 0.795)
+        );
+        input {
+            font-family: 'Lato', sans-serif;
+            font-size: 14px;
+            letter-spacing: 2px;
+            border: 0;
+            border-radius: 5px;
+            outline: none;
+            padding: 10px 20px;
+            margin: 5px;
+        }
+        #appt {
+            padding: 8px;
+        }
+        button {
+            float: right;
+            border: 0px;
+            border-radius: 5px;
+            background-color: rgb(242, 106, 113);
+            color: white;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 10px;
+            margin: 5px;
+            box-shadow: 0 5px 22px 0 #b36b3e5e;
+            &:hover {
+                background-color: rgb(238, 158, 162);
+            }
+        }
     }
 }

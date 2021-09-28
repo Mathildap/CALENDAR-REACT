@@ -9,6 +9,7 @@ import Today from './components/Today';
 import Login from './components/Login';
 import Notes from './components/Notes';
 import NewNote from './components/NewNote';
+import Edit from './components/Edit';
 
 moment.updateLocale('sv', {
     week: {
@@ -150,7 +151,6 @@ function App() {
 
     // - - - - -  - -  TODOS - - - -  - - - //
     let [todos, setTodos] = useState();
-    let [savedTodo, setSavedTodo] = useState();
 
     // POST NEW TODO TO DB
     const sendTodo = (todo) => {
@@ -161,8 +161,6 @@ function App() {
             date: newTodoDay,
             done: false,
         };
-
-        setSavedTodo(saveTodo);
 
         fetch('https://calendar-backend-mathildap.herokuapp.com/new', {
             method: 'post',
@@ -219,7 +217,29 @@ function App() {
         })
             .then((resp) => resp.json())
             .then((jsonRes) => {
-                console.log(jsonRes);
+                setTodos(jsonRes);
+            });
+    };
+
+    // EDIT TODO
+    let [todoEdit, setTodoEdit] = useState('');
+
+    const editTodo = (todo) => {
+        setTodoEdit(todo);
+    };
+
+    const updatedTodo = (info) => {
+        console.log(info);
+
+        fetch('https://calendar-backend-mathildap.herokuapp.com/edit', {
+            method: 'post',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify(info),
+        })
+            .then((resp) => resp.json())
+            .then((jsonRes) => {
+                setTodos(jsonRes);
+                setTodoEdit('');
             });
     };
 
@@ -244,7 +264,6 @@ function App() {
         )
             .then((resp) => resp.json())
             .then((jsonRes) => {
-                console.log(jsonRes);
                 setNotes(jsonRes);
             });
     };
@@ -313,6 +332,7 @@ function App() {
                                     todos={todos}
                                     onDelete={deleteTask}
                                     onToggle={toggleReminder}
+                                    editTodo={editTodo}
                                 />
                                 <NewTodo
                                     clickedDay={clickedDay}
@@ -330,6 +350,15 @@ function App() {
                             />
                         </aside>
                     </section>
+                    {todoEdit === '' ? (
+                        ''
+                    ) : (
+                        <Edit
+                            todo={todoEdit}
+                            updatedTodo={updatedTodo}
+                            closeEdit={() => setTodoEdit('')}
+                        />
+                    )}
                 </>
             )}
         </main>
