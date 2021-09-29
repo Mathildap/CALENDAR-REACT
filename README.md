@@ -6,7 +6,7 @@
 
 ### Run app live
 
-Go to https://calendar-mathildap.herokuapp.com/
+Go to https://mathildap.github.io/CALENDAR-REACT/
 
 #### Test-user:
 | email         | password |
