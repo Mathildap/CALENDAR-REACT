@@ -2,7 +2,7 @@ import moment from 'moment';
 import React from 'react';
 import Todo from './Todo';
 
-function AllTodos({ todos, onDelete, onToggle }) {
+function AllTodos({ todos, onDelete, onToggle, editTodo }) {
     if (todos === undefined) {
         return (
             <div className='aside-container alltodos-container loading'>
@@ -26,6 +26,7 @@ function AllTodos({ todos, onDelete, onToggle }) {
                             todo={todo}
                             onDelete={onDelete}
                             onToggle={onToggle}
+                            editTodo={editTodo}
                         />
                     ))}
             </div>

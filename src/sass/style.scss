@@ -756,11 +756,15 @@
 
     // EDIT TODO
     .edit-container {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+
         width: 25%;
+        height: auto;
         display: inline-block;
-        position: absolute;
-        top: 30%;
-        margin: 0 35%;
         z-index: 10;
         padding: 30px;
         border: 1px solid white;

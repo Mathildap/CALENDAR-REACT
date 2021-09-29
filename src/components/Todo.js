@@ -1,10 +1,15 @@
 import React from 'react';
 import { BiCheck, BiTrash } from 'react-icons/bi';
 
-function Todo({ todo, onDelete, onToggle }) {
+function Todo({ todo, onDelete, onToggle, editTodo }) {
     return (
         <div className='todo'>
-            <div className={`${todo.done === true ? 'reminder' : ''}`}>
+            <div
+                className={`${todo.done === true ? 'reminder' : ''}`}
+                onClick={() => {
+                    editTodo(todo);
+                }}
+            >
                 <span className='todo-text'>{todo.text}</span>
                 <span className='todo-time_date'>{todo.time}</span>
                 <span className='todo-time_date'>{todo.date}</span>

@@ -347,6 +347,7 @@ function App() {
                                 todos={todos}
                                 onDelete={deleteTask}
                                 onToggle={toggleReminder}
+                                editTodo={editTodo}
                             />
                         </aside>
                     </section>
