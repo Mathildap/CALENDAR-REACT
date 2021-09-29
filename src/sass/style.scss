@@ -340,6 +340,11 @@
         max-height: 200px;
         overflow: scroll;
     }
+    .todo-click-box {
+        display: flex;
+        justify-content: space-between;
+        width: 85%;
+    }
     .alltodos-container {
         height: 600px;
         overflow: scroll;
@@ -747,6 +752,11 @@
     .today-todo_container {
         height: 280px;
         overflow: scroll;
+    }
+    .todo-click-box {
+        display: flex;
+        justify-content: space-between;
+        width: 85%;
     }
     .alltodos-container {
         height: 600px;

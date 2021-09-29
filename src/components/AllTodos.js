@@ -20,6 +20,7 @@ function AllTodos({ todos, onDelete, onToggle, editTodo }) {
                             ? 1
                             : -1
                     )
+                    .filter((todo) => todo.done === false)
                     .map((todo) => (
                         <Todo
                             key={todo._id}

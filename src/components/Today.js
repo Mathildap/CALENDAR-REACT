@@ -20,18 +20,22 @@ function Today({ clickedDay, todos, onDelete, onToggle, editTodo }) {
                                 className={`${
                                     todo.done === true ? 'reminder' : ''
                                 }`}
-                                onClick={() => {
-                                    editTodo(todo);
-                                }}
                             >
-                                {todo.text}
-                                {'  '}
-                                <span className='todo-time_date'>
-                                    {todo.time}
-                                </span>
-                                <span className='todo-time_date'>
-                                    {todo.date}
-                                </span>
+                                <div
+                                    className='todo-click-box'
+                                    onClick={() => {
+                                        editTodo(todo);
+                                    }}
+                                >
+                                    {todo.text}
+                                    {'  '}
+                                    <span className='todo-time_date'>
+                                        {todo.time}
+                                    </span>
+                                    <span className='todo-time_date'>
+                                        {todo.date}
+                                    </span>
+                                </div>
                                 <div>
                                     <BiCheck
                                         style={{
