@@ -21,6 +21,7 @@ function App() {
     // - - - - -  - -  LOGIN / USER - - - -  - - - //
     let [user, setUser] = useState('');
     let [errorMsg, setErrorMsg] = useState();
+    let [emailExist, setEmailExist] = useState();
 
     // USER
     const userInfo = (info) => {
@@ -36,6 +37,7 @@ function App() {
                     return;
                 }
                 setUser({ userName: jsonRes.username, id: jsonRes.id });
+                setErrorMsg();
             });
     };
 
@@ -48,7 +50,12 @@ function App() {
         })
             .then((resp) => resp.json())
             .then((jsonRes) => {
+                if (jsonRes === 'email exist') {
+                    setEmailExist('email exist');
+                    return;
+                }
                 setUser({ userName: jsonRes.username, id: jsonRes.id });
+                setEmailExist();
             });
     };
 
@@ -303,6 +310,7 @@ function App() {
                     userInfo={userInfo}
                     newUserInfo={newUserInfo}
                     errorMsg={errorMsg}
+                    emailExist={emailExist}
                 />
             ) : (
                 <>

@@ -13,10 +13,13 @@ function Header(month) {
         month.changeMonth('forward');
     };
 
+    let myStr = month.user;
+    let firstName = myStr.split(' ')[0];
+
     return (
         <header>
             <div className='header-name_btn'>
-                <div className='header-username'>{month.user}</div>
+                <div className='header-username'>{firstName}</div>
                 <button onClick={month.logOutHandler} className='logOutBtn'>
                     Sign out
                 </button>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { BsEye } from 'react-icons/bs';
 
-function Login({ userInfo, newUserInfo, errorMsg }) {
+function Login({ userInfo, newUserInfo, errorMsg, emailExist }) {
     let [email, setEmail] = useState('');
     let [password, setPassword] = useState('');
     let [hasAccount, setHasAccount] = useState(true);
@@ -35,6 +36,24 @@ function Login({ userInfo, newUserInfo, errorMsg }) {
         userInfo(info);
     };
 
+    const showPassword = () => {
+        let pwType = document.getElementById('passWord');
+        if (pwType.type === 'password') {
+            pwType.type = 'text';
+        } else {
+            pwType.type = 'password';
+        }
+    };
+
+    const showNewPassword = () => {
+        let pw = document.getElementById('newPassWord');
+        if (pw.type === 'password') {
+            pw.type = 'text';
+        } else {
+            pw.type = 'password';
+        }
+    };
+
     return (
         <>
             {hasAccount ? (
@@ -50,6 +69,10 @@ function Login({ userInfo, newUserInfo, errorMsg }) {
                                     onChange={emailHandler}
                                     value={email}
                                     required
+                                />
+                                <BsEye
+                                    className='eye-icon'
+                                    onClick={showPassword}
                                 />
                                 <input
                                     type='password'
@@ -105,9 +128,13 @@ function Login({ userInfo, newUserInfo, errorMsg }) {
                                     }
                                     value={newEmail}
                                 />
+                                <BsEye
+                                    className='eye-icon new-icon'
+                                    onClick={showNewPassword}
+                                />
                                 <input
                                     type='password'
-                                    placeholder=' CHOOSE PASSWORD'
+                                    placeholder='CHOOSE PASSWORD'
                                     id='newPassWord'
                                     className='logInField'
                                     required='required'
@@ -116,7 +143,11 @@ function Login({ userInfo, newUserInfo, errorMsg }) {
                                     }
                                     value={newPassword}
                                 />
-                                <p id='newErrorMsg'></p>
+                                {emailExist ? (
+                                    <p id='errorMsg'>Email already exist!</p>
+                                ) : (
+                                    ''
+                                )}
                                 <button id='createAccount'>
                                     Create account
                                 </button>

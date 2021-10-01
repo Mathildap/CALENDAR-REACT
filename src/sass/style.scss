@@ -111,6 +111,16 @@
             color: white;
         }
     }
+    .eye-icon {
+        position: absolute;
+        right: 10%;
+        top: 85px;
+        z-index: 10;
+        color: #777;
+    }
+    .new-icon {
+        top: 132px;
+    }
 
     /* - - - - - - - HEADER - - - - - - -  */
     .header {
@@ -207,6 +217,9 @@
             position: relative;
             overflow: hidden;
             margin-left: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         .dot {
             display: none;
@@ -527,6 +540,16 @@
             color: white;
         }
     }
+    .eye-icon {
+        position: absolute;
+        right: 10%;
+        top: 85px;
+        z-index: 10;
+        color: #777;
+    }
+    .new-icon {
+        top: 132px;
+    }
 
     /* - - - - - - - HEADER - - - - - - -  */
     .header {
@@ -622,6 +645,9 @@
             &:first-of-type {
                 margin-top: 20px;
             }
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         .days-todo_count {
             font-family: 'Lato', sans-serif;
