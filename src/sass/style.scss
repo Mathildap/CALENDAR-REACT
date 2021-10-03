@@ -541,14 +541,14 @@
         }
     }
     .eye-icon {
-        position: absolute;
-        right: 10%;
-        top: 85px;
-        z-index: 10;
-        color: #777;
-    }
-    .new-icon {
-        top: 132px;
+        font-family: 'Lato', sans-serif;
+        color: rgb(255, 255, 255);
+        margin-left: 55px;
+        font-size: 12px;
+        cursor: pointer;
+        &:hover {
+            color: #bf98988e;
+        }
     }
 
     /* - - - - - - - HEADER - - - - - - -  */
