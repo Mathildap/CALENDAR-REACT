@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { BsEye } from 'react-icons/bs';
+import { auth } from '../Firebase/firebase';
+import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 
-function Login({ userInfo, newUserInfo, errorMsg, emailExist }) {
+function Login({ userInfo, newUserInfo, errorMsg, emailExist, googleLogin }) {
     let [email, setEmail] = useState('');
     let [password, setPassword] = useState('');
     let [hasAccount, setHasAccount] = useState(true);
@@ -17,6 +18,20 @@ function Login({ userInfo, newUserInfo, errorMsg, emailExist }) {
     const pWordHandler = (e) => {
         setPassword(e.target.value);
     };
+
+    async function signInWithGoogle() {
+        const provider = new GoogleAuthProvider();
+        try {
+            const res = await signInWithPopup(auth, provider);
+            let googleUserInfo = {
+                email: res.user.email,
+                userName: res.user.displayName,
+            };
+            googleLogin(googleUserInfo);
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
     const newUserHandler = (e) => {
         e.preventDefault();
@@ -90,13 +105,32 @@ function Login({ userInfo, newUserInfo, errorMsg, emailExist }) {
                                 ) : (
                                     ''
                                 )}
-                                <button id='logInBtn'>Sign in</button>
+                                <button type='submit' id='logInBtn'>
+                                    Sign in
+                                </button>
                                 <p
                                     onClick={() => setHasAccount(!hasAccount)}
                                     id='signUp'
                                 >
                                     Create account
                                 </p>
+                                <hr />
+                                <h4>OR</h4>
+                                <div
+                                    className='google-btn'
+                                    onClick={signInWithGoogle}
+                                >
+                                    <div className='google-icon-wrapper'>
+                                        <img
+                                            className='google-icon'
+                                            src='https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg'
+                                            alt='google icon'
+                                        />
+                                    </div>
+                                    <p className='btn-text'>
+                                        <b>Sign in with google</b>
+                                    </p>
+                                </div>
                             </form>
                         </div>
                     </div>

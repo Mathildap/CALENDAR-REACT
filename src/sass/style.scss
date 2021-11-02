@@ -1,3 +1,8 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:500);
+$white: #fff;
+$google-blue: rgba(255, 255, 255, 0.358);
+$button-active-blue: #bfd2f0;
+
 @media screen and (max-width: 850px) {
     body {
         max-width: 850px;
@@ -73,7 +78,10 @@
             margin-left: 5px;
         }
         &:hover {
-            background-color: rgb(238, 158, 162);
+            box-shadow: 0 0 6px $google-blue;
+        }
+        &:active {
+            background: $button-active-blue;
         }
     }
     .logOutBtn {
@@ -100,11 +108,10 @@
         font-family: 'Quicksand', sans-serif;
         font-size: 13px;
         text-align: center;
-        text-decoration: underline;
         letter-spacing: 1px;
         color: rgb(255, 255, 255);
         margin: 0px;
-        margin-bottom: 10px;
+        margin-bottom: 20px;
         text-shadow: 0 5px 22px #b36b3e5e;
         cursor: pointer;
         &:hover {
@@ -112,6 +119,7 @@
         }
     }
     .eye-icon {
+        display: inline;
         font-family: 'Lato', sans-serif;
         color: rgb(255, 255, 255);
         margin-left: 34px;
@@ -119,6 +127,58 @@
         cursor: pointer;
         &:hover {
             color: #bf98988e;
+        }
+    }
+
+    hr {
+        border: 1px solid #ffffffa1;
+        outline: 0;
+        width: 80%;
+    }
+    h4 {
+        color: white;
+        font-family: 'Quicksand', sans-serif;
+        font-weight: normal;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        text-align: center;
+    }
+    .google-btn {
+        margin: 20px auto;
+        width: 184px;
+        height: 42px;
+        background-color: $google-blue;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px 0 rgba(67, 67, 67, 0.25);
+        .google-icon-wrapper {
+            position: absolute;
+            margin-top: 1px;
+            margin-left: 1px;
+            width: 40px;
+            height: 40px;
+            border-radius: 2px;
+            background-color: $white;
+        }
+        .google-icon {
+            position: absolute;
+            margin-top: 11px;
+            margin-left: 11px;
+            width: 18px;
+            height: 18px;
+        }
+        .btn-text {
+            float: right;
+            margin: 11px 11px 0 0;
+            color: #fff;
+            font-size: 14px;
+            letter-spacing: 0.2px;
+            font-family: 'Lato', sans-serif;
+        }
+        &:hover {
+            box-shadow: 0 0 6px $google-blue;
+        }
+        &:active {
+            background: $button-active-blue;
         }
     }
 
@@ -516,7 +576,10 @@
         margin: 10px;
         box-shadow: 0 5px 22px 0 #b36b3e5e;
         &:hover {
-            background-color: rgb(238, 158, 162);
+            box-shadow: 0 0 6px $google-blue;
+        }
+        &:active {
+            background: $button-active-blue;
         }
     }
     #errorMsg {
@@ -529,7 +592,6 @@
         font-family: 'Quicksand', sans-serif;
         font-size: 13px;
         text-align: center;
-        text-decoration: underline;
         letter-spacing: 1px;
         color: rgb(101, 96, 96);
         margin: 0px;
@@ -548,6 +610,57 @@
         cursor: pointer;
         &:hover {
             color: #bf98988e;
+        }
+    }
+    hr {
+        border: 1px solid #ffffffa1;
+        outline: 0;
+        width: 80%;
+    }
+    h4 {
+        color: white;
+        font-family: 'Quicksand', sans-serif;
+        font-weight: normal;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        text-align: center;
+    }
+    .google-btn {
+        margin: 20px auto;
+        width: 184px;
+        height: 42px;
+        background-color: $google-blue;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px 0 rgba(67, 67, 67, 0.25);
+        .google-icon-wrapper {
+            position: absolute;
+            margin-top: 1px;
+            margin-left: 1px;
+            width: 40px;
+            height: 40px;
+            border-radius: 2px;
+            background-color: $white;
+        }
+        .google-icon {
+            position: absolute;
+            margin-top: 11px;
+            margin-left: 11px;
+            width: 18px;
+            height: 18px;
+        }
+        .btn-text {
+            float: right;
+            margin: 11px 11px 0 0;
+            color: #fff;
+            font-size: 14px;
+            letter-spacing: 0.2px;
+            font-family: 'Lato', sans-serif;
+        }
+        &:hover {
+            box-shadow: 0 0 6px $google-blue;
+        }
+        &:active {
+            background: $button-active-blue;
         }
     }
 

@@ -10,6 +10,8 @@ import Login from './components/Login';
 import Notes from './components/Notes';
 import NewNote from './components/NewNote';
 import Edit from './components/Edit';
+import { auth } from './Firebase/firebase';
+import { signOut } from 'firebase/auth';
 
 moment.updateLocale('sv', {
     week: {
@@ -59,6 +61,37 @@ function App() {
             });
     };
 
+    // GOOGLE LOGIN
+    const googleLogin = (info) => {
+        fetch(
+            'https://calendar-backend-mathildap.herokuapp.com/users/googleLogin',
+            {
+                method: 'post',
+                headers: { 'Content-type': 'application/json' },
+                body: JSON.stringify({ info }),
+            }
+        )
+            .then((resp) => resp.json())
+            .then((jsonRes) => {
+                const googleUser = {
+                    userName: jsonRes.username,
+                    id: jsonRes.id,
+                    googleLogin: jsonRes.googleLogin,
+                };
+                setUser(googleUser);
+            })
+            .catch((err) => console.log(err));
+    };
+
+    // LOG OUT
+    const logOutHandler = () => {
+        setUser('');
+        if (user.googleLogin === true) {
+            console.log('google logout');
+            signOut(auth);
+        }
+    };
+
     // - - - - -  - -  GET / CHANGE MONTH - - - -  - - - //
     let [monthInNr, setMonthInNr] = useState(moment().format('MM-YYYY'));
 
@@ -98,10 +131,11 @@ function App() {
     // - - - - -  - -  FETCH HOLIDAY API - - - -  - - - //
     let [apiYear, setApiYear] = useState(monthInNr.slice(-4));
     let [api, setApi] = useState([]);
-    let HOLIDAY_API = '';
-    let useMonth;
 
     useEffect(() => {
+        let HOLIDAY_API = '';
+        let useMonth;
+
         useMonth = monthInNr.slice(0, 2);
         setApiYear(monthInNr.slice(-4));
         HOLIDAY_API +=
@@ -110,6 +144,9 @@ function App() {
             .then((resp) => resp.json())
             .then((data) => {
                 setApi(data.dagar);
+            })
+            .catch((error) => {
+                console.log(error);
             });
     }, [monthInNr]);
 
@@ -132,7 +169,7 @@ function App() {
 
     // GET WHICH DAY THE MONTH BEGINS
     const getEmptyDays = () => {
-        let firstDay = moment(monthInNr, 'MM')
+        let firstDay = moment(monthInNr, 'MM-YYYY')
             .startOf('month')
             .add(-1, 'days')
             .format('d');
@@ -143,7 +180,6 @@ function App() {
     useEffect(() => {
         getDaysArrayByMonth();
         getEmptyDays();
-        // eslint-disabke.next-line react-hooks/exhaustive-deps
     }, [monthInNr]);
 
     // - - - - -  - -  CHOOSED DAY - - - -  - - - //
@@ -179,17 +215,40 @@ function App() {
     };
 
     // GET TODOS FROM DB
+    // useEffect(() => {
+    //     let userId = user.id;
+
+    //     fetch('https://calendar-backend-mathildap.herokuapp.com/get', {
+    //         method: 'post',
+    //         headers: { 'Content-type': 'application/json' },
+    //         body: JSON.stringify({ userId }),
+    //     })
+    //         .then((res) => res.json())
+    //         .then((jsonRes) => setTodos(jsonRes));
+    // }, [user]);
+
+    // GET TODOS FROM DB
     useEffect(() => {
+        getUsersTodos();
+    }, [user]);
+
+    async function getUsersTodos() {
         let userId = user.id;
 
-        fetch('https://calendar-backend-mathildap.herokuapp.com/get', {
-            method: 'post',
-            headers: { 'Content-type': 'application/json' },
-            body: JSON.stringify({ userId }),
-        })
-            .then((res) => res.json())
-            .then((jsonRes) => setTodos(jsonRes));
-    }, [user]);
+        try {
+            const res = await fetch(
+                'https://calendar-backend-mathildap.herokuapp.com/get',
+                {
+                    method: 'post',
+                    headers: { 'Content-type': 'application/json' },
+                    body: JSON.stringify({ userId }),
+                }
+            ).then((resp) => resp.json());
+            setTodos(res);
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
     // DELETE TODO
     const deleteTask = (id) => {
@@ -309,6 +368,7 @@ function App() {
                 <Login
                     userInfo={userInfo}
                     newUserInfo={newUserInfo}
+                    googleLogin={googleLogin}
                     errorMsg={errorMsg}
                     emailExist={emailExist}
                 />
@@ -318,9 +378,7 @@ function App() {
                         month={monthInNr}
                         changeMonth={changeMonth}
                         user={user.userName}
-                        logOutHandler={() => {
-                            setUser('');
-                        }}
+                        logOutHandler={logOutHandler}
                     />
                     <section className='main-container'>
                         <Calendar
