@@ -12,6 +12,7 @@ import NewNote from './components/NewNote';
 import Edit from './components/Edit';
 import { auth } from './Firebase/firebase';
 import { signOut } from 'firebase/auth';
+import WeekLayout from './components/WeekLayout';
 
 moment.updateLocale('sv', {
     week: {
@@ -87,7 +88,6 @@ function App() {
     const logOutHandler = () => {
         setUser('');
         if (user.googleLogin === true) {
-            console.log('google logout');
             signOut(auth);
         }
     };
@@ -190,6 +190,17 @@ function App() {
     const choosedDay = (answer) => {
         setNewTodoDay(answer.id);
         setClickedDay(answer.id);
+    };
+
+    // - - - - -  - -  WEEK LAYOUT - - - -  - - - //
+    let [weekLayout, setWeekLayout] = useState(false);
+
+    const weekLayoutHandler = (change) => {
+        if (weekLayout) {
+            setWeekLayout(!weekLayout);
+        } else {
+            setWeekLayout(!weekLayout);
+        }
     };
 
     // - - - - -  - -  TODOS - - - -  - - - //
@@ -379,18 +390,24 @@ function App() {
                         changeMonth={changeMonth}
                         user={user.userName}
                         logOutHandler={logOutHandler}
+                        weekLayoutHandler={weekLayoutHandler}
                     />
                     <section className='main-container'>
-                        <Calendar
-                            monthInNr={monthInNr}
-                            days={days}
-                            api={api}
-                            firstDayOfMonth={emptyDays}
-                            clickedDay={choosedDay}
-                            todos={todos}
-                            onDelete={deleteTask}
-                            onToggle={toggleReminder}
-                        />
+                        {weekLayout ? (
+                            <WeekLayout />
+                        ) : (
+                            <Calendar
+                                monthInNr={monthInNr}
+                                days={days}
+                                api={api}
+                                firstDayOfMonth={emptyDays}
+                                clickedDay={choosedDay}
+                                todos={todos}
+                                onDelete={deleteTask}
+                                onToggle={toggleReminder}
+                            />
+                        )}
+
                         <aside>
                             <div className='aside-container'>
                                 <Today

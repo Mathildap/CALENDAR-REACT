@@ -170,7 +170,7 @@ $button-active-blue: #bfd2f0;
             float: right;
             margin: 11px 11px 0 0;
             color: #fff;
-            font-size: 14px;
+            font-size: 12px;
             letter-spacing: 0.2px;
             font-family: 'Lato', sans-serif;
         }
@@ -697,6 +697,17 @@ $button-active-blue: #bfd2f0;
     .header-name_btn {
         display: flex;
         justify-content: space-between;
+    }
+    .header-icon_btn {
+        display: flex;
+        align-items: center;
+    }
+    .header-calendar-icon {
+        font-size: 35px;
+        color: rgb(248, 173, 129);
+        &:hover {
+            color: rgba(248, 173, 129, 0.543);
+        }
     }
 
     /* - - - - - - - CALENDAR - - - - - - -  */

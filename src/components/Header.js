@@ -1,6 +1,6 @@
 import moment from 'moment';
 import React from 'react';
-import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
+import { BiChevronLeft, BiChevronRight, BiCalendarWeek } from 'react-icons/bi';
 
 function Header(month) {
     let formatMonth = moment(month.month, 'MM-YYYY').format('MMMM YYYY');
@@ -13,6 +13,11 @@ function Header(month) {
         month.changeMonth('forward');
     };
 
+    const changeLayout = () => {
+        console.log('change layout');
+        month.weekLayoutHandler('change');
+    };
+
     let myStr = month.user;
     let firstName = myStr.split(' ')[0];
 
@@ -20,9 +25,15 @@ function Header(month) {
         <header>
             <div className='header-name_btn'>
                 <div className='header-username'>{firstName}</div>
-                <button onClick={month.logOutHandler} className='logOutBtn'>
-                    Sign out
-                </button>
+                <div className='header-icon_btn'>
+                    <BiCalendarWeek
+                        className='header-calendar-icon'
+                        onClick={changeLayout}
+                    />
+                    <button onClick={month.logOutHandler} className='logOutBtn'>
+                        Sign out
+                    </button>
+                </div>
             </div>
             <div className='header'>
                 <BiChevronLeft
