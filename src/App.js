@@ -14,6 +14,7 @@ import { auth } from './Firebase/firebase';
 import { signOut } from 'firebase/auth';
 import WeekLayout from './components/WeekLayout';
 import WeekHeader from './components/WeekHeader';
+import Info from './components/Info';
 
 moment.updateLocale('sv', {
     week: {
@@ -400,6 +401,9 @@ function App() {
             });
     };
 
+    // DISPLAY INFO
+    let [showInfo, setShowInfo] = useState(false);
+
     return (
         <main>
             {user === '' ? (
@@ -413,101 +417,68 @@ function App() {
             ) : (
                 <>
                     {weekLayout ? (
-                        <>
-                            <WeekHeader
-                                changeWeek={changeWeek}
-                                week={week}
-                                weekLayoutHandler={weekLayoutHandler}
-                                user={user.userName}
-                                logOutHandler={logOutHandler}
-                            />
-                            <section className='main-container'>
-                                <WeekLayout
-                                    weekDates={weekDates}
-                                    todos={todos}
-                                    monthInNr={monthInNr}
-                                />
-                                <aside>
-                                    <div className='aside-container'>
-                                        <Today
-                                            clickedDay={clickedDay}
-                                            todos={todos}
-                                            onDelete={deleteTask}
-                                            onToggle={toggleReminder}
-                                            editTodo={editTodo}
-                                        />
-                                        <NewTodo
-                                            clickedDay={clickedDay}
-                                            inputToDo={sendTodo}
-                                        />
-                                    </div>
-                                    <div className='aside-container'>
-                                        <Notes
-                                            notes={notes}
-                                            onDelete={deleteNote}
-                                        />
-                                        <NewNote newNote={newNote} />
-                                    </div>
-                                    <AllTodos
-                                        todos={todos}
-                                        onDelete={deleteTask}
-                                        onToggle={toggleReminder}
-                                        editTodo={editTodo}
-                                    />
-                                </aside>
-                            </section>
-                        </>
+                        <WeekHeader
+                            changeWeek={changeWeek}
+                            week={week}
+                            weekLayoutHandler={weekLayoutHandler}
+                            user={user.userName}
+                            logOutHandler={logOutHandler}
+                        />
                     ) : (
-                        <>
-                            <Header
-                                month={monthInNr}
-                                changeMonth={changeMonth}
-                                user={user.userName}
-                                logOutHandler={logOutHandler}
-                                weekLayoutHandler={weekLayoutHandler}
+                        <Header
+                            month={monthInNr}
+                            changeMonth={changeMonth}
+                            user={user.userName}
+                            logOutHandler={logOutHandler}
+                            weekLayoutHandler={weekLayoutHandler}
+                        />
+                    )}
+                    <section className='main-container'>
+                        {weekLayout ? (
+                            <WeekLayout
+                                weekDates={weekDates}
+                                todos={todos}
+                                monthInNr={monthInNr}
                             />
-                            <section className='main-container'>
-                                <Calendar
-                                    monthInNr={monthInNr}
-                                    days={days}
-                                    api={api}
-                                    firstDayOfMonth={emptyDays}
-                                    clickedDay={choosedDay}
+                        ) : (
+                            <Calendar
+                                monthInNr={monthInNr}
+                                days={days}
+                                api={api}
+                                firstDayOfMonth={emptyDays}
+                                clickedDay={choosedDay}
+                                todos={todos}
+                                onDelete={deleteTask}
+                                onToggle={toggleReminder}
+                            />
+                        )}
+                        <aside>
+                            <div className='aside-container'>
+                                <Today
+                                    clickedDay={clickedDay}
                                     todos={todos}
                                     onDelete={deleteTask}
                                     onToggle={toggleReminder}
+                                    editTodo={editTodo}
+                                    openInfo={(info) => setShowInfo(!showInfo)}
                                 />
-                                <aside>
-                                    <div className='aside-container'>
-                                        <Today
-                                            clickedDay={clickedDay}
-                                            todos={todos}
-                                            onDelete={deleteTask}
-                                            onToggle={toggleReminder}
-                                            editTodo={editTodo}
-                                        />
-                                        <NewTodo
-                                            clickedDay={clickedDay}
-                                            inputToDo={sendTodo}
-                                        />
-                                    </div>
-                                    <div className='aside-container'>
-                                        <Notes
-                                            notes={notes}
-                                            onDelete={deleteNote}
-                                        />
-                                        <NewNote newNote={newNote} />
-                                    </div>
-                                    <AllTodos
-                                        todos={todos}
-                                        onDelete={deleteTask}
-                                        onToggle={toggleReminder}
-                                        editTodo={editTodo}
-                                    />
-                                </aside>
-                            </section>
-                        </>
-                    )}
+                                <NewTodo
+                                    clickedDay={clickedDay}
+                                    inputToDo={sendTodo}
+                                />
+                            </div>
+                            <div className='aside-container'>
+                                <Notes notes={notes} onDelete={deleteNote} />
+                                <NewNote newNote={newNote} />
+                            </div>
+                            <AllTodos
+                                todos={todos}
+                                onDelete={deleteTask}
+                                onToggle={toggleReminder}
+                                editTodo={editTodo}
+                            />
+                        </aside>
+                    </section>
                     {todoEdit === '' ? (
                         ''
                     ) : (
@@ -516,6 +487,11 @@ function App() {
                             updatedTodo={updatedTodo}
                             closeEdit={() => setTodoEdit('')}
                         />
+                    )}
+                    {!showInfo ? (
+                        ''
+                    ) : (
+                        <Info closeEdit={() => setShowInfo(false)} />
                     )}
                 </>
             )}

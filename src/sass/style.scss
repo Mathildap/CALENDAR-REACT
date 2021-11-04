@@ -3,88 +3,605 @@ $white: #fff;
 $google-blue: rgba(255, 255, 255, 0.358);
 $button-active-blue: #bfd2f0;
 
-@media screen and (max-width: 850px) {
-    body {
-        max-width: 850px;
-        height: 100%;
-        margin: 0 auto;
-        overflow: scroll;
-        border: 2px solid rgb(248, 173, 129);
-    }
+body {
+    max-width: 850px;
+    height: 100%;
+    margin: 0 auto;
+    overflow: scroll;
+    border: 2px solid rgb(248, 173, 129);
+}
 
-    .login-page {
-        margin: 0px;
-        padding: 0px;
-        height: 100vh;
-        background-image: linear-gradient(
-            to bottom right,
-            rgb(248, 173, 129),
-            rgb(241, 136, 139)
-        );
-        background-repeat: no-repeat;
-        background-size: cover;
-        overflow: auto;
-    }
-    #logInContainer,
-    #newLogInContainer {
-        width: 70%;
-        margin: 35px auto;
-        background: #ffffff4d;
-        box-shadow: 0 5px 22px 0 #b36b3e5e;
-        backdrop-filter: blur(0px);
-        -webkit-backdrop-filter: blur(0px);
-        border: 1px solid #ffffff8f;
-        border-radius: 5px;
-    }
-    #logInInputs {
-        display: flex;
-        flex-flow: column;
-        margin-top: 20px;
-    }
-    .logInField {
-        display: block;
-        width: 80%;
-        height: 20px;
-        margin: 5px auto;
-        padding: 10px;
-        font-family: 'Quicksand', sans-serif;
-        letter-spacing: 1px;
-        outline: none;
-        border-radius: 20px;
-        background: #ffffffec;
-        box-shadow: 0 5px 22px 0 #b36b3e5e;
-        backdrop-filter: blur(0px);
-        -webkit-backdrop-filter: blur(0px);
-        border: 1px solid #ffffff8f;
+.login-page {
+    margin: 0px;
+    padding: 0px;
+    height: 100vh;
+    background-image: linear-gradient(
+        to bottom right,
+        rgb(248, 173, 129),
+        rgb(241, 136, 139)
+    );
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: auto;
+}
+#logInContainer,
+#newLogInContainer {
+    width: 70%;
+    margin: 35px auto;
+    background: #ffffff4d;
+    box-shadow: 0 5px 22px 0 #b36b3e5e;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    border: 1px solid #ffffff8f;
+    border-radius: 5px;
+}
+#logInInputs {
+    display: flex;
+    flex-flow: column;
+    margin-top: 20px;
+}
+.logInField {
+    display: block;
+    width: 80%;
+    height: 20px;
+    margin: 5px auto;
+    padding: 10px;
+    font-family: 'Quicksand', sans-serif;
+    letter-spacing: 1px;
+    outline: none;
+    border-radius: 20px;
+    background: #ffffffec;
+    box-shadow: 0 5px 22px 0 #b36b3e5e;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    border: 1px solid #ffffff8f;
+    font-size: 15px;
+}
+#logInBtn,
+#createAccount {
+    display: block;
+    margin: 20px auto 15px auto;
+    border: 0px;
+    border-radius: 5px;
+    background-color: rgb(242, 106, 113);
+    color: white;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 10px;
+    box-shadow: 0 5px 22px 0 #b36b3e5e;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    border: 1px solid #ffffff8f;
+    .fa-sign-in-alt {
         font-size: 15px;
+        margin-left: 5px;
     }
-    #logInBtn,
-    #createAccount {
-        display: block;
-        margin: 20px auto 15px auto;
-        border: 0px;
+    &:hover {
+        box-shadow: 0 0 6px $google-blue;
+    }
+    &:active {
+        background: $button-active-blue;
+    }
+}
+.logOutBtn {
+    border: 0px;
+    border-radius: 5px;
+    background-color: rgb(242, 106, 113);
+    color: white;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 0 5px 22px 0 #b36b3e5e;
+    &:hover {
+        background-color: rgb(238, 158, 162);
+    }
+}
+#errorMsg {
+    font-family: 'Quicksand', sans-serif;
+    text-align: center;
+    letter-spacing: 1px;
+    color: #2d2d2d;
+}
+#signUp {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 13px;
+    text-align: center;
+    letter-spacing: 1px;
+    color: rgb(255, 255, 255);
+    margin: 0px;
+    margin-bottom: 20px;
+    text-shadow: 0 5px 22px #b36b3e5e;
+    cursor: pointer;
+    &:hover {
+        color: #bf98988e;
+    }
+}
+.eye-icon {
+    display: inline;
+    font-family: 'Lato', sans-serif;
+    color: rgb(255, 255, 255);
+    margin-left: 34px;
+    font-size: 12px;
+    cursor: pointer;
+    &:hover {
+        color: #bf98988e;
+    }
+}
+
+hr {
+    border: 1px solid #ffffffa1;
+    outline: 0;
+    width: 80%;
+}
+h4 {
+    color: white;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: normal;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+}
+.google-btn {
+    margin: 20px auto;
+    width: 184px;
+    height: 42px;
+    background-color: $google-blue;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px 0 rgba(67, 67, 67, 0.25);
+    .google-icon-wrapper {
+        position: absolute;
+        margin-top: 1px;
+        margin-left: 1px;
+        width: 40px;
+        height: 40px;
+        border-radius: 2px;
+        background-color: $white;
+    }
+    .google-icon {
+        position: absolute;
+        margin-top: 11px;
+        margin-left: 11px;
+        width: 18px;
+        height: 18px;
+    }
+    .btn-text {
+        float: right;
+        margin: 11px 11px 0 0;
+        color: #fff;
+        font-size: 12px;
+        letter-spacing: 0.2px;
+        font-family: 'Lato', sans-serif;
+    }
+    &:hover {
+        box-shadow: 0 0 6px $google-blue;
+    }
+    &:active {
+        background: $button-active-blue;
+    }
+}
+
+/* - - - - - - - HEADER - - - - - - -  */
+.header {
+    height: 120px;
+    display: flex;
+    justify-content: space-around;
+
+    h1 {
+        font-family: 'Lato', sans-serif;
+        text-transform: uppercase;
+        text-align: center;
+        letter-spacing: 2px;
+        font-size: 25px;
+        color: rgb(241, 136, 139);
+        margin: auto 20px;
+    }
+    .header-arrow {
+        font-size: 35px;
+        color: rgb(241, 136, 139);
+        height: 50px;
+        margin: auto 20px;
+    }
+}
+.header-username {
+    font-family: 'Lato', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 12px;
+    margin: 10px;
+    color: rgb(248, 141, 129);
+}
+.header-name_btn {
+    display: flex;
+    justify-content: space-between;
+}
+.header-icon_btn {
+    display: flex;
+    align-items: center;
+}
+.header-calendar-icon {
+    display: none;
+    font-size: 25px;
+    color: rgb(248, 173, 129);
+    &:hover {
+        color: rgba(248, 173, 129, 0.543);
+    }
+}
+
+/* - - - - - - - CALENDAR - - - - - - -  */
+.loading {
+    margin: auto;
+    margin-top: 40px;
+}
+.calendar-container {
+    width: 100%;
+    height: 100%;
+}
+
+/* WEEK LAYOUT*/
+.weekLayout-changeWeek {
+    display: flex;
+
+    h2 {
+        font-family: 'Lato', sans-serif;
+        letter-spacing: 2px;
+        font-size: 20px;
+        color: rgba(241, 136, 139, 0.747);
+        margin: auto 20px;
+    }
+    .header-arrow {
+        font-size: 20px;
+        color: rgb(241, 136, 139);
+        height: 40px;
+        margin: auto 10px;
+    }
+}
+.weekLayout {
+    width: 100%;
+    height: 100%;
+
+    .weekLayout-container {
+        width: 100%;
+        margin-top: 20px;
+        .weekLayout-weekdays {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            font-family: 'Lato', sans-serif;
+            text-transform: uppercase;
+            font-size: 12px;
+            color: rgb(248, 173, 129);
+        }
+        .weekLayout-weekdays_day {
+            width: 14%;
+            text-align: center;
+        }
+        .weekLayout-dates {
+            text-align: center;
+            font-family: 'Lato', sans-serif;
+            font-size: 12px;
+            text-transform: uppercase;
+            color: rgb(248, 173, 129);
+            margin-bottom: 3px;
+        }
+        .weekLayout-column-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .weekLayout-column {
+            width: 14%;
+            margin: 3px;
+        }
+        .weekLayout-column-border {
+            width: 100%;
+            border: 1px solid #f7b4b49a;
+            border-radius: 5px;
+        }
+
+        .weekLayout-hour_container {
+            border-bottom: 1px solid #f7b4b49a;
+            height: 20px;
+            font-family: 'Lato', sans-serif;
+            font-size: 7px;
+            color: rgb(248, 173, 129);
+            padding-top: 5px;
+            padding-left: 5px;
+        }
+    }
+}
+#colorHourDiv {
+    background-color: #77777756;
+    color: black;
+}
+
+/* WEEK */
+.weekdays-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+.weekdays-day_cont {
+    font-family: 'Lato', sans-serif;
+    text-transform: uppercase;
+    color: rgb(248, 173, 129);
+    margin: 20px auto;
+}
+
+/* DAYS */
+.days-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+.days-day_cont {
+    min-width: 11%;
+    max-width: 11%;
+    overflow: scroll;
+    height: 50px;
+    border: 1px solid pink;
+    border-radius: 10px;
+    box-shadow: 0px 0px 3px 1px #e9e1d7;
+    margin: 5px;
+    cursor: pointer;
+    position: relative;
+    h3 {
+        margin: 5px;
+        margin-bottom: 1px;
+        font-size: 10px;
+        font-family: 'Lato', sans-serif;
+        color: rgb(241, 136, 139);
+        .days-api {
+            font-size: 0.3rem;
+            margin-left: 2px;
+        }
+    }
+    .day-todo {
+        font-family: 'Lato', sans-serif;
+        font-size: 0.3rem;
+        color: #4f4f4f;
+        position: relative;
+        overflow: hidden;
+        margin-left: 4px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .dot {
+        display: none;
+    }
+    .days-todo_count {
+        display: none;
+    }
+}
+.currentday {
+    background-image: linear-gradient(
+        to bottom right,
+        rgb(245, 164, 165),
+        rgb(241, 136, 139)
+    );
+    border: 1px solid white;
+    box-shadow: 0 0 20px rgb(255, 180, 137);
+    h3 {
+        color: white;
+    }
+    .day-todo {
+        color: white;
+    }
+    .days-todo_count {
+        color: white;
+    }
+}
+.clickedday {
+    background-image: linear-gradient(
+        to bottom right,
+        rgb(252, 193, 159),
+        rgb(252, 169, 120)
+    );
+    border: 1px solid white;
+    box-shadow: 0 0 13px rgb(252, 193, 159);
+    h3 {
+        color: white;
+    }
+    .day-todo {
+        color: white;
+    }
+    .days-todo_count {
+        color: white;
+    }
+}
+.empty {
+    background-color: rgba(248, 173, 129, 0.5);
+}
+.inline {
+    cursor: pointer;
+}
+.dragging {
+    background-color: red;
+}
+
+/* - - - - - - - ASIDE - - - - - - -  */
+aside {
+    width: 99%;
+    margin: 15px auto;
+}
+
+.aside-container {
+    border: 1px solid white;
+    box-shadow: 0px 2px 5px #c7c7c7;
+    border-radius: 10px;
+    background-image: linear-gradient(
+        to bottom,
+        rgb(248, 173, 129),
+        rgb(241, 136, 139)
+    );
+    margin-bottom: 20px;
+    padding: 10px;
+
+    h1 {
+        font-family: 'Lato', sans-serif;
+        text-transform: uppercase;
+        text-align: center;
+        letter-spacing: 2px;
+        font-size: 20px;
+        color: rgb(254, 252, 252);
+        margin: 20px 20px;
+    }
+    input {
+        font-family: 'Lato', sans-serif;
+        font-size: 14px;
+        letter-spacing: 2px;
+        border: 0;
+        border-radius: 5px;
+        outline: none;
+        padding: 10px 20px;
+        margin: 5px;
+    }
+    .appt {
+        padding: 8px;
+    }
+    form span {
+        color: white;
+    }
+    .time_addBtn {
+        display: flex;
+        justify-content: space-between;
+    }
+    #newTodoBtn {
+        border: 1px solid #ffffffc9;
+        width: 20%;
         border-radius: 5px;
         background-color: rgb(242, 106, 113);
         color: white;
         letter-spacing: 1px;
         text-transform: uppercase;
-        padding: 10px;
-        box-shadow: 0 5px 22px 0 #b36b3e5e;
-        backdrop-filter: blur(0px);
-        -webkit-backdrop-filter: blur(0px);
-        border: 1px solid #ffffff8f;
-        .fa-sign-in-alt {
-            font-size: 15px;
-            margin-left: 5px;
-        }
+        margin: 4px 10px;
         &:hover {
-            box-shadow: 0 0 6px $google-blue;
+            box-shadow: 0 3px 6px $google-blue;
         }
         &:active {
-            background: $button-active-blue;
+            background-color: rgba(242, 106, 113, 0.413);
         }
     }
-    .logOutBtn {
+    #newTodoInput {
+        width: 86%;
+    }
+    #newNoteInput {
+        width: 60%;
+    }
+    #newNoteBtn {
+        border: 1px solid #ffffffc9;
+        width: 20%;
+        border-radius: 5px;
+        background-color: rgb(242, 106, 113);
+        color: white;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        padding: 10px 20px;
+        margin: 5px;
+        &:hover {
+            box-shadow: 0 3px 6px $google-blue;
+        }
+        &:active {
+            background-color: rgba(242, 106, 113, 0.413);
+        }
+    }
+    .info-icon {
+        color: #ffffffc0;
+        font-size: 20px;
+        float: right;
+    }
+}
+
+/* - - - - - - - TODOS - - - - - - -  */
+.todo {
+    font-family: 'Lato', sans-serif;
+    letter-spacing: 0.5px;
+    background: #f4f4f44a;
+    color: #ffffff;
+    margin: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.todo-text {
+    width: 45%;
+    white-space: nowrap;
+    overflow: scroll;
+}
+.todo-time_date {
+    font-size: 0.7rem;
+    white-space: nowrap;
+    overflow: scroll;
+}
+.time-dash {
+    margin: 0 2px;
+}
+.reminder {
+    text-decoration: line-through;
+}
+.todo div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.today-todo_container {
+    height: 100%;
+    max-height: 200px;
+    overflow: scroll;
+}
+.todo-click-box {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+}
+.alltodos-container {
+    height: 600px;
+    overflow: scroll;
+}
+.loading {
+    font-family: 'Lato', sans-serif;
+    color: white;
+    letter-spacing: 0.5px;
+}
+
+// EDIT TODO
+.edit-container {
+    position: fixed;
+    top: 50%;
+    left: 35%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+
+    width: 55%;
+    display: inline-block;
+    margin: 0 15%;
+    z-index: 10;
+    padding: 25px;
+    border: 1px solid white;
+    box-shadow: 0 0 25px #cfc6c6;
+    border-radius: 10px;
+    background-image: linear-gradient(
+        to bottom,
+        rgba(248, 173, 129, 0.822),
+        rgba(241, 136, 139, 0.795)
+    );
+    input {
+        font-family: 'Lato', sans-serif;
+        font-size: 14px;
+        letter-spacing: 2px;
+        border: 0;
+        border-radius: 5px;
+        outline: none;
+        padding: 10px 20px;
+        margin: 5px;
+    }
+    #appt {
+        padding: 8px;
+    }
+    button {
+        float: right;
         border: 0px;
         border-radius: 5px;
         background-color: rgb(242, 106, 113);
@@ -92,505 +609,19 @@ $button-active-blue: #bfd2f0;
         letter-spacing: 1px;
         text-transform: uppercase;
         padding: 10px;
-        margin: 10px;
+        margin: 5px;
         box-shadow: 0 5px 22px 0 #b36b3e5e;
         &:hover {
             background-color: rgb(238, 158, 162);
         }
     }
-    #errorMsg {
-        font-family: 'Quicksand', sans-serif;
-        text-align: center;
-        letter-spacing: 1px;
-        color: #2d2d2d;
-    }
-    #signUp {
-        font-family: 'Quicksand', sans-serif;
-        font-size: 13px;
-        text-align: center;
-        letter-spacing: 1px;
-        color: rgb(255, 255, 255);
-        margin: 0px;
-        margin-bottom: 20px;
-        text-shadow: 0 5px 22px #b36b3e5e;
-        cursor: pointer;
-        &:hover {
-            color: #bf98988e;
-        }
-    }
-    .eye-icon {
-        display: inline;
-        font-family: 'Lato', sans-serif;
-        color: rgb(255, 255, 255);
-        margin-left: 34px;
-        font-size: 12px;
-        cursor: pointer;
-        &:hover {
-            color: #bf98988e;
-        }
-    }
+}
 
-    hr {
-        border: 1px solid #ffffffa1;
-        outline: 0;
-        width: 80%;
-    }
-    h4 {
-        color: white;
-        font-family: 'Quicksand', sans-serif;
-        font-weight: normal;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        text-align: center;
-    }
-    .google-btn {
-        margin: 20px auto;
-        width: 184px;
-        height: 42px;
-        background-color: $google-blue;
-        border-radius: 5px;
-        box-shadow: 0 2px 4px 0 rgba(67, 67, 67, 0.25);
-        .google-icon-wrapper {
-            position: absolute;
-            margin-top: 1px;
-            margin-left: 1px;
-            width: 40px;
-            height: 40px;
-            border-radius: 2px;
-            background-color: $white;
-        }
-        .google-icon {
-            position: absolute;
-            margin-top: 11px;
-            margin-left: 11px;
-            width: 18px;
-            height: 18px;
-        }
-        .btn-text {
-            float: right;
-            margin: 11px 11px 0 0;
-            color: #fff;
-            font-size: 12px;
-            letter-spacing: 0.2px;
-            font-family: 'Lato', sans-serif;
-        }
-        &:hover {
-            box-shadow: 0 0 6px $google-blue;
-        }
-        &:active {
-            background: $button-active-blue;
-        }
-    }
-
-    /* - - - - - - - HEADER - - - - - - -  */
-    .header {
-        height: 120px;
-        display: flex;
-        justify-content: space-around;
-
-        h1 {
-            font-family: 'Lato', sans-serif;
-            text-transform: uppercase;
-            text-align: center;
-            letter-spacing: 2px;
-            font-size: 25px;
-            color: rgb(241, 136, 139);
-            margin: auto 20px;
-        }
-        .header-arrow {
-            font-size: 35px;
-            color: rgb(241, 136, 139);
-            height: 50px;
-            margin: auto 20px;
-        }
-    }
-    .header-username {
-        font-family: 'Lato', sans-serif;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        font-size: 12px;
-        margin: 10px;
-        color: rgb(248, 141, 129);
-    }
-    .header-name_btn {
-        display: flex;
-        justify-content: space-between;
-    }
-    .header-icon_btn {
-        display: flex;
-        align-items: center;
-    }
-    .header-calendar-icon {
-        display: none;
-        font-size: 25px;
-        color: rgb(248, 173, 129);
-        &:hover {
-            color: rgba(248, 173, 129, 0.543);
-        }
-    }
-
-    /* - - - - - - - CALENDAR - - - - - - -  */
-    .loading {
-        margin: auto;
-        margin-top: 40px;
-    }
-    .calendar-container {
-        width: 100%;
-        height: 100%;
-    }
-    /* WEEK LAYOUT*/
-
-    .weekLayout {
-        width: 100%;
-        height: 100%;
-
-        .weekLayout-container {
-            width: 100%;
-            margin-top: 20px;
-            .weekLayout-weekdays {
-                width: 100%;
-                display: flex;
-                justify-content: space-around;
-                font-family: 'Lato', sans-serif;
-                text-transform: uppercase;
-                font-size: 12px;
-                color: rgb(248, 173, 129);
-            }
-            .weekLayout-weekdays_day {
-                width: 14%;
-                text-align: center;
-            }
-            .weekLayout-dates {
-                text-align: center;
-                font-family: 'Lato', sans-serif;
-                font-size: 12px;
-                text-transform: uppercase;
-                color: rgb(248, 173, 129);
-                margin-bottom: 3px;
-            }
-            .weekLayout-column-container {
-                display: flex;
-                justify-content: space-between;
-            }
-            .weekLayout-column {
-                width: 14%;
-                margin: 3px;
-            }
-            .weekLayout-column-border {
-                width: 100%;
-                border: 1px solid #f7b4b49a;
-                border-radius: 5px;
-            }
-
-            .weekLayout-hour_container {
-                border-bottom: 1px solid #f7b4b49a;
-                height: 20px;
-                font-family: 'Lato', sans-serif;
-                font-size: 7px;
-                color: rgb(248, 173, 129);
-                padding-top: 5px;
-                padding-left: 5px;
-            }
-        }
-    }
-
-    /* WEEK */
-    .weekdays-container {
-        width: 100%;
-        display: flex;
-        justify-content: space-around;
-    }
-    .weekdays-day_cont {
-        font-family: 'Lato', sans-serif;
-        text-transform: uppercase;
-        color: rgb(248, 173, 129);
-        margin: 20px auto;
-    }
-
-    /* DAYS */
-    .days-container {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-    }
-    .days-day_cont {
-        min-width: 11%;
-        max-width: 11%;
-        overflow: scroll;
-        height: 50px;
-        border: 1px solid pink;
-        border-radius: 10px;
-        box-shadow: 0px 0px 3px 1px #e9e1d7;
-        margin: 5px;
-        cursor: pointer;
-        position: relative;
-        h3 {
-            margin: 5px;
-            margin-bottom: 1px;
-            font-size: 10px;
-            font-family: 'Lato', sans-serif;
-            color: rgb(241, 136, 139);
-            .days-api {
-                font-size: 0.3rem;
-                margin-left: 2px;
-            }
-        }
-        .day-todo {
-            font-family: 'Lato', sans-serif;
-            font-size: 0.3rem;
-            color: #4f4f4f;
-            position: relative;
-            overflow: hidden;
-            margin-left: 4px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .dot {
-            display: none;
-        }
-        .days-todo_count {
-            display: none;
-        }
-    }
-    .currentday {
-        background-image: linear-gradient(
-            to bottom right,
-            rgb(245, 164, 165),
-            rgb(241, 136, 139)
-        );
-        border: 1px solid white;
-        box-shadow: 0 0 20px rgb(255, 180, 137);
-        h3 {
-            color: white;
-        }
-        .day-todo {
-            color: white;
-        }
-        .days-todo_count {
-            color: white;
-        }
-    }
-    .clickedday {
-        background-image: linear-gradient(
-            to bottom right,
-            rgb(252, 193, 159),
-            rgb(252, 169, 120)
-        );
-        border: 1px solid white;
-        box-shadow: 0 0 13px rgb(252, 193, 159);
-        h3 {
-            color: white;
-        }
-        .day-todo {
-            color: white;
-        }
-        .days-todo_count {
-            color: white;
-        }
-    }
-    .empty {
-        background-color: rgba(248, 173, 129, 0.5);
-    }
-    .inline {
-        cursor: pointer;
-    }
-    .dragging {
-        background-color: red;
-    }
-
-    /* - - - - - - - ASIDE - - - - - - -  */
-    aside {
-        width: 99%;
-        margin: 15px auto;
-    }
-
-    .aside-container {
-        border: 1px solid white;
-        box-shadow: 0px 2px 5px #c7c7c7;
-        border-radius: 10px;
-        background-image: linear-gradient(
-            to bottom,
-            rgb(248, 173, 129),
-            rgb(241, 136, 139)
-        );
-        margin-bottom: 20px;
-        padding: 10px;
-
-        h1 {
-            font-family: 'Lato', sans-serif;
-            text-transform: uppercase;
-            text-align: center;
-            letter-spacing: 2px;
-            font-size: 20px;
-            color: rgb(254, 252, 252);
-            margin: 20px 20px;
-        }
-        input {
-            font-family: 'Lato', sans-serif;
-            font-size: 14px;
-            letter-spacing: 2px;
-            border: 0;
-            border-radius: 5px;
-            outline: none;
-            padding: 10px 20px;
-            margin: 5px;
-        }
-        .appt {
-            padding: 8px;
-        }
-        form span {
-            color: white;
-        }
-        .time_addBtn {
-            display: flex;
-            justify-content: space-between;
-        }
-        #newTodoBtn {
-            border: 1px solid #ffffffc9;
-            width: 20%;
-            border-radius: 5px;
-            background-color: rgb(242, 106, 113);
-            color: white;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin: 4px 10px;
-            &:hover {
-                box-shadow: 0 3px 6px $google-blue;
-            }
-            &:active {
-                background-color: rgba(242, 106, 113, 0.413);
-            }
-        }
-        #newTodoInput {
-            width: 86%;
-        }
-        #newNoteInput {
-            width: 60%;
-        }
-        #newNoteBtn {
-            border: 1px solid #ffffffc9;
-            width: 20%;
-            border-radius: 5px;
-            background-color: rgb(242, 106, 113);
-            color: white;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            padding: 10px 20px;
-            margin: 5px;
-            &:hover {
-                box-shadow: 0 3px 6px $google-blue;
-            }
-            &:active {
-                background-color: rgba(242, 106, 113, 0.413);
-            }
-        }
-    }
-
-    /* - - - - - - - TODOS - - - - - - -  */
-    .todo {
-        font-family: 'Lato', sans-serif;
-        letter-spacing: 0.5px;
-        background: #f4f4f44a;
-        color: #ffffff;
-        margin: 5px;
-        padding: 10px 20px;
-        cursor: pointer;
-        border-radius: 5px;
-    }
-    .todo-text {
-        width: 45%;
-        white-space: nowrap;
-        overflow: scroll;
-    }
-    .todo-time_date {
-        font-size: 0.7rem;
-        white-space: nowrap;
-        overflow: scroll;
-    }
-    .time-dash {
-        margin: 0 2px;
-    }
-    .reminder {
-        text-decoration: line-through;
-    }
-    .todo div {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-    .today-todo_container {
-        height: 100%;
-        max-height: 200px;
-        overflow: scroll;
-    }
-    .todo-click-box {
-        display: flex;
-        justify-content: space-between;
-        width: 90%;
-    }
-    .alltodos-container {
-        height: 600px;
-        overflow: scroll;
-    }
-    .loading {
-        font-family: 'Lato', sans-serif;
-        color: white;
-        letter-spacing: 0.5px;
-    }
-
-    // EDIT TODO
-    .edit-container {
-        position: fixed;
-        top: 50%;
-        left: 35%;
-        -webkit-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
-
-        width: 55%;
-        display: inline-block;
-        margin: 0 15%;
-        z-index: 10;
-        padding: 25px;
-        border: 1px solid white;
-        box-shadow: 0 0 25px #cfc6c6;
-        border-radius: 10px;
-        background-image: linear-gradient(
-            to bottom,
-            rgba(248, 173, 129, 0.822),
-            rgba(241, 136, 139, 0.795)
-        );
-        input {
-            font-family: 'Lato', sans-serif;
-            font-size: 14px;
-            letter-spacing: 2px;
-            border: 0;
-            border-radius: 5px;
-            outline: none;
-            padding: 10px 20px;
-            margin: 5px;
-        }
-        #appt {
-            padding: 8px;
-        }
-        button {
-            float: right;
-            border: 0px;
-            border-radius: 5px;
-            background-color: rgb(242, 106, 113);
-            color: white;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            padding: 10px;
-            margin: 5px;
-            box-shadow: 0 5px 22px 0 #b36b3e5e;
-            &:hover {
-                background-color: rgb(238, 158, 162);
-            }
-        }
-    }
+// INFO
+.info-text {
+    color: #454545;
+    font-family: 'Lato', sans-serif;
+    letter-spacing: 0.5px;
 }
 
 @media screen and (min-width: 851px) {
@@ -598,368 +629,89 @@ $button-active-blue: #bfd2f0;
     body {
         min-width: 1080px;
         max-width: 2200px;
-        height: 100%;
-        margin: 0 auto;
-        overflow: scroll;
-        border: 2px solid rgb(248, 173, 129);
     }
     .main-container {
         display: flex;
         justify-content: space-around;
+        margin: 0 10px;
     }
 
     /* - - - - - - - LOGIN - - - - - - -  */
     .login-page {
-        margin: 0px;
-        padding: 0px;
         height: 1200px;
-        background-image: linear-gradient(
-            to bottom right,
-            rgb(248, 173, 129),
-            rgb(241, 136, 139)
-        );
-        background-repeat: no-repeat;
-        background-size: cover;
-        overflow: auto;
     }
     #logInContainer,
     #newLogInContainer {
         width: 40%;
-        margin: 35px auto;
-        background: #ffffff4d;
-        box-shadow: 0 5px 22px 0 #b36b3e5e;
-        backdrop-filter: blur(0px);
-        -webkit-backdrop-filter: blur(0px);
-        border: 1px solid #ffffff8f;
-        border-radius: 5px;
-    }
-    #logInInputs {
-        display: flex;
-        flex-flow: column;
-        margin-top: 20px;
-    }
-    .logInField {
-        display: block;
-        width: 80%;
-        height: 20px;
-        margin: 5px auto;
-        padding: 10px;
-        font-family: 'Quicksand', sans-serif;
-        letter-spacing: 1px;
-        outline: none;
-        border-radius: 20px;
-        background: #ffffffec;
-        box-shadow: 0 5px 22px 0 #b36b3e5e;
-        backdrop-filter: blur(0px);
-        -webkit-backdrop-filter: blur(0px);
-        border: 1px solid #ffffff8f;
-        font-size: 15px;
     }
     #logInBtn,
     #createAccount {
-        display: block;
         margin: 10px auto 15px auto;
-        border: 0px;
-        border-radius: 5px;
-        background-color: rgb(242, 106, 113);
-        color: white;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        padding: 10px;
-        box-shadow: 0 5px 22px 0 #b36b3e5e;
-        backdrop-filter: blur(0px);
-        -webkit-backdrop-filter: blur(0px);
-        border: 1px solid #ffffff8f;
-        .fa-sign-in-alt {
-            font-size: 15px;
-            margin-left: 5px;
-        }
-        &:hover {
-            background-color: rgb(238, 158, 162);
-        }
-    }
-    .logOutBtn {
-        border: 0px;
-        border-radius: 5px;
-        background-color: rgb(242, 106, 113);
-        color: white;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        padding: 10px;
-        margin: 10px;
-        box-shadow: 0 5px 22px 0 #b36b3e5e;
-        &:hover {
-            box-shadow: 0 0 6px $google-blue;
-        }
-        &:active {
-            background: $button-active-blue;
-        }
-    }
-    #errorMsg {
-        font-family: 'Quicksand', sans-serif;
-        text-align: center;
-        letter-spacing: 1px;
-        color: #2d2d2d;
-    }
-    #signUp {
-        font-family: 'Quicksand', sans-serif;
-        font-size: 13px;
-        text-align: center;
-        letter-spacing: 1px;
-        color: rgb(101, 96, 96);
-        margin: 0px;
-        margin-bottom: 5px;
-        text-shadow: 0 5px 22px #b36b3e5e;
-        cursor: pointer;
-        &:hover {
-            color: white;
-        }
     }
     .eye-icon {
-        font-family: 'Lato', sans-serif;
-        color: rgb(255, 255, 255);
         margin-left: 55px;
-        font-size: 12px;
-        cursor: pointer;
-        &:hover {
-            color: #bf98988e;
-        }
     }
-    hr {
-        border: 1px solid #ffffffa1;
-        outline: 0;
-        width: 80%;
-    }
-    h4 {
-        color: white;
-        font-family: 'Quicksand', sans-serif;
-        font-weight: normal;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        text-align: center;
-    }
-    .google-btn {
-        margin: 20px auto;
-        width: 184px;
-        height: 42px;
-        background-color: $google-blue;
-        border-radius: 5px;
-        box-shadow: 0 2px 4px 0 rgba(67, 67, 67, 0.25);
-        .google-icon-wrapper {
-            position: absolute;
-            margin-top: 1px;
-            margin-left: 1px;
-            width: 40px;
-            height: 40px;
-            border-radius: 2px;
-            background-color: $white;
-        }
-        .google-icon {
-            position: absolute;
-            margin-top: 11px;
-            margin-left: 11px;
-            width: 18px;
-            height: 18px;
-        }
-        .btn-text {
-            float: right;
-            margin: 11px 11px 0 0;
-            color: #fff;
-            font-size: 14px;
-            letter-spacing: 0.2px;
-            font-family: 'Lato', sans-serif;
-        }
-        &:hover {
-            box-shadow: 0 0 6px $google-blue;
-        }
-        &:active {
-            background: $button-active-blue;
-        }
+    .btn-text {
+        font-size: 14px;
     }
 
     /* - - - - - - - HEADER - - - - - - -  */
     .header {
-        height: 150px;
-        display: flex;
-        justify-content: space-around;
+        height: 200px;
 
         h1 {
-            font-family: 'Lato', sans-serif;
-            text-transform: uppercase;
-            text-align: center;
-            letter-spacing: 2px;
             font-size: 45px;
-            color: rgb(241, 136, 139);
-            margin: auto 20px;
         }
         .header-arrow {
             font-size: 45px;
-            color: rgb(241, 136, 139);
-            height: 50px;
-            margin: auto 20px;
         }
     }
     .header-username {
-        font-family: 'Lato', sans-serif;
-        text-transform: uppercase;
-        letter-spacing: 2px;
         font-size: 15px;
-        margin: 10px;
-        color: rgb(248, 141, 129);
-    }
-    .header-name_btn {
-        display: flex;
-        justify-content: space-between;
-    }
-    .header-icon_btn {
-        display: flex;
-        align-items: center;
     }
     .header-calendar-icon {
-        display: none;
         font-size: 35px;
-        color: rgb(248, 173, 129);
-        &:hover {
-            color: rgba(248, 173, 129, 0.543);
-        }
     }
 
     /* - - - - - - - CALENDAR - - - - - - -  */
-    .loading {
-        margin: auto;
-        margin-top: 40px;
-    }
     .calendar-container {
         width: 65%;
-        height: 100%;
     }
 
     /* WEEK LAYOUT*/
-    .weekLayout-changeWeek {
-        display: flex;
-
-        h2 {
-            font-family: 'Lato', sans-serif;
-            letter-spacing: 2px;
-            font-size: 20px;
-            color: rgba(241, 136, 139, 0.747);
-            margin: auto 20px;
-        }
-        .header-arrow {
-            font-size: 20px;
-            color: rgb(241, 136, 139);
-            height: 40px;
-            margin: auto 10px;
-        }
-    }
-
-    #colorHourDiv {
-        background-color: #77777756;
-        color: black;
-    }
-    .weekLayout {
-        width: 100%;
-        height: 100%;
-
-        .weekLayout-container {
-            width: 100%;
-            margin-top: 20px;
-            .weekLayout-weekdays {
-                width: 100%;
-                display: flex;
-                justify-content: space-around;
-                font-family: 'Lato', sans-serif;
-                text-transform: uppercase;
-                color: rgb(248, 173, 129);
-            }
-            .weekLayout-weekdays_day {
-                width: 14%;
-                text-align: center;
-            }
-            .weekLayout-dates {
-                text-align: center;
-                font-family: 'Lato', sans-serif;
-                text-transform: uppercase;
-                color: rgb(248, 173, 129);
-            }
-            .weekLayout-column-container {
-                display: flex;
-                justify-content: space-between;
-            }
-            .weekLayout-column {
-                width: 14%;
-                margin: 5px;
-            }
-            .weekLayout-column-border {
-                width: 100%;
-                border: 1px solid #f7b4b49a;
-                border-radius: 5px;
-            }
-
-            .weekLayout-hour_container {
-                border-bottom: 1px solid #f7b4b49a;
-                height: 30px;
-                font-family: 'Lato', sans-serif;
-                font-size: 11px;
-                color: rgb(248, 173, 129);
-                padding-top: 5px;
-                padding-left: 5px;
-            }
-        }
+    .weekLayout-hour_container {
+        height: 30px;
+        font-size: 11px;
     }
 
     /* WEEK */
-    .weekdays-container {
-        width: 100%;
-        display: flex;
-        justify-content: space-around;
-    }
-    .weekdays-day_cont {
-        font-family: 'Lato', sans-serif;
-        text-transform: uppercase;
-        color: rgb(248, 173, 129);
-        margin: 20px auto;
-    }
 
     /* DAYS */
-    .days-container {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-    }
     .days-day_cont {
         min-width: 12%;
         max-width: 12%;
-        overflow: scroll;
         height: 100px;
-        border: 1px solid pink;
-        border-radius: 10px;
-        box-shadow: 0px 0px 3px 1px #e9e1d7;
         margin: 1%;
-        cursor: pointer;
-        position: relative;
         h3 {
-            margin: 5px;
-            font-family: 'Lato', sans-serif;
-            color: rgb(241, 136, 139);
+            font-size: 20px;
             .days-api {
                 font-size: 0.7rem;
                 margin-left: 5px;
             }
         }
+
         .day-todo {
-            font-family: 'Lato', sans-serif;
             font-size: 0.9rem;
-            color: #4f4f4f;
-            position: relative;
             &:first-of-type {
-                margin-top: 20px;
+                margin-top: 5px;
             }
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+        }
+
+        .dot {
+            display: inline;
+        }
+        .days-todo_count {
+            display: none;
         }
         .days-todo_count {
             font-family: 'Lato', sans-serif;
@@ -972,234 +724,41 @@ $button-active-blue: #bfd2f0;
         }
     }
     .currentday {
-        background-image: linear-gradient(
-            to bottom right,
-            rgb(245, 164, 165),
-            rgb(241, 136, 139)
-        );
-        border: 1px solid white;
-        box-shadow: 0 0 20px rgb(255, 180, 137);
         h3 {
-            color: white;
-        }
-        .day-todo {
-            color: white;
-        }
-        .days-todo_count {
             color: white;
         }
     }
     .clickedday {
-        background-image: linear-gradient(
-            to bottom right,
-            rgb(252, 193, 159),
-            rgb(252, 169, 120)
-        );
-        border: 1px solid white;
-        box-shadow: 0 0 13px rgb(252, 193, 159);
         h3 {
             color: white;
         }
-        .day-todo {
-            color: white;
-        }
-        .days-todo_count {
-            color: white;
-        }
-    }
-    .empty {
-        background-color: rgba(248, 173, 129, 0.5);
-    }
-    .inline {
-        cursor: pointer;
     }
 
     /* - - - - - - - ASIDE - - - - - - -  */
     aside {
         width: 30%;
+        margin-right: 10px;
     }
 
     .aside-container {
-        border: 1px solid white;
-        box-shadow: 0px 2px 5px #c7c7c7;
-        border-radius: 10px;
-        background-image: linear-gradient(
-            to bottom,
-            rgb(248, 173, 129),
-            rgb(241, 136, 139)
-        );
-        margin-bottom: 20px;
-        padding: 10px;
-
         h1 {
-            font-family: 'Lato', sans-serif;
-            text-transform: uppercase;
-            text-align: center;
-            letter-spacing: 2px;
             font-size: 25px;
-            color: rgb(254, 252, 252);
-            margin: 20px 20px;
-        }
-        input {
-            font-family: 'Lato', sans-serif;
-            font-size: 14px;
-            letter-spacing: 2px;
-            border: 0;
-            border-radius: 5px;
-            outline: none;
-            padding: 10px 20px;
-            margin: 5px;
-        }
-        .appt {
-            padding: 8px;
-        }
-        form span {
-            color: white;
-        }
-        .time_addBtn {
-            display: flex;
-            justify-content: space-between;
-        }
-        #newTodoBtn {
-            border: 1px solid #ffffffc9;
-            width: 20%;
-            border-radius: 5px;
-            background-color: rgb(242, 106, 113);
-            color: white;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin: 4px 10px;
-            &:hover {
-                box-shadow: 0 3px 6px $google-blue;
-            }
-            &:active {
-                background-color: rgba(242, 106, 113, 0.413);
-            }
-        }
-        #newTodoInput {
-            width: 86%;
-        }
-        #newNoteInput {
-            width: 60%;
-        }
-        #newNoteBtn {
-            border: 1px solid #ffffffc9;
-            width: 20%;
-            border-radius: 5px;
-            background-color: rgb(242, 106, 113);
-            color: white;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            padding: 10px 20px;
-            margin: 5px;
-            &:hover {
-                box-shadow: 0 3px 6px $google-blue;
-            }
-            &:active {
-                background-color: rgba(242, 106, 113, 0.413);
-            }
         }
     }
 
     /* - - - - - - - TODOS - - - - - - -  */
-    .todo {
-        font-family: 'Lato', sans-serif;
-        letter-spacing: 0.5px;
-        background: #f4f4f44a;
-        color: #ffffff;
-        margin: 5px;
-        padding: 10px 20px;
-        cursor: pointer;
-        border-radius: 5px;
-    }
     .todo-text {
         width: 50%;
-        white-space: nowrap;
-        overflow: scroll;
-    }
-    .todo-time_date {
-        font-size: 0.7rem;
-        white-space: nowrap;
-        overflow: scroll;
-    }
-    .time-dash {
-        margin: 0 2px;
-    }
-    .reminder {
-        text-decoration: line-through;
-    }
-    .todo div {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
     }
     .today-todo_container {
         height: 280px;
-        overflow: scroll;
-    }
-    .todo-click-box {
-        display: flex;
-        justify-content: space-between;
-        width: 90%;
-    }
-    .alltodos-container {
-        height: 600px;
-        overflow: scroll;
-    }
-    .loading {
-        font-family: 'Lato', sans-serif;
-        color: white;
-        letter-spacing: 0.5px;
     }
 
     // EDIT TODO
     .edit-container {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        -webkit-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
-
+        left: 32%;
         width: 25%;
         height: auto;
-        display: inline-block;
-        z-index: 10;
         padding: 30px;
-        border: 1px solid white;
-        box-shadow: 0 0 25px #cfc6c6;
-        border-radius: 10px;
-        background-image: linear-gradient(
-            to bottom,
-            rgba(248, 173, 129, 0.822),
-            rgba(241, 136, 139, 0.795)
-        );
-        input {
-            font-family: 'Lato', sans-serif;
-            font-size: 14px;
-            letter-spacing: 2px;
-            border: 0;
-            border-radius: 5px;
-            outline: none;
-            padding: 10px 20px;
-            margin: 5px;
-        }
-        #appt {
-            padding: 8px;
-        }
-        button {
-            float: right;
-            border: 0px;
-            border-radius: 5px;
-            background-color: rgb(242, 106, 113);
-            color: white;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            padding: 10px;
-            margin: 5px;
-            box-shadow: 0 5px 22px 0 #b36b3e5e;
-            &:hover {
-                background-color: rgb(238, 158, 162);
-            }
-        }
     }
 }

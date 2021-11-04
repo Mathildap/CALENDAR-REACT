@@ -1,14 +1,21 @@
 import moment from 'moment';
 import React from 'react';
-import { BiCheck, BiTrash } from 'react-icons/bi';
+import { BiCheck, BiTrash, BiHelpCircle } from 'react-icons/bi';
 
-function Today({ clickedDay, todos, onDelete, onToggle, editTodo }) {
+function Today({ clickedDay, todos, onDelete, onToggle, editTodo, openInfo }) {
     let formatDate = moment(clickedDay, 'DD-MM-YYYY').format('D MMMM YY');
     if (todos === undefined) {
         return <div className='aside-container loading'>Loading...</div>;
     } else {
         return (
             <article className='today-todo_container'>
+                <div
+                    onClick={() => {
+                        openInfo('change');
+                    }}
+                >
+                    <BiHelpCircle className='info-icon' />
+                </div>
                 <h1>{formatDate}</h1>
                 {todos
                     .sort((a, b) => (b.time < a.time ? 1 : -1))

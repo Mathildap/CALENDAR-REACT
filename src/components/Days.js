@@ -42,7 +42,7 @@ function Days({ day, api, month, clickedDay, colorDayHandler, todos }) {
     };
 
     if (todos === undefined) {
-        return <div>Loading..</div>;
+        return <div></div>;
     } else {
         let id = day + '-' + month;
         let totalTodos = 0;
