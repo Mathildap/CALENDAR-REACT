@@ -216,6 +216,18 @@ $button-active-blue: #bfd2f0;
         display: flex;
         justify-content: space-between;
     }
+    .header-icon_btn {
+        display: flex;
+        align-items: center;
+    }
+    .header-calendar-icon {
+        display: none;
+        font-size: 25px;
+        color: rgb(248, 173, 129);
+        &:hover {
+            color: rgba(248, 173, 129, 0.543);
+        }
+    }
 
     /* - - - - - - - CALENDAR - - - - - - -  */
     .loading {
@@ -225,6 +237,61 @@ $button-active-blue: #bfd2f0;
     .calendar-container {
         width: 100%;
         height: 100%;
+    }
+    /* WEEK LAYOUT*/
+
+    .weekLayout {
+        width: 100%;
+        height: 100%;
+
+        .weekLayout-container {
+            width: 100%;
+            margin-top: 20px;
+            .weekLayout-weekdays {
+                width: 100%;
+                display: flex;
+                justify-content: space-around;
+                font-family: 'Lato', sans-serif;
+                text-transform: uppercase;
+                font-size: 12px;
+                color: rgb(248, 173, 129);
+            }
+            .weekLayout-weekdays_day {
+                width: 14%;
+                text-align: center;
+            }
+            .weekLayout-dates {
+                text-align: center;
+                font-family: 'Lato', sans-serif;
+                font-size: 12px;
+                text-transform: uppercase;
+                color: rgb(248, 173, 129);
+                margin-bottom: 3px;
+            }
+            .weekLayout-column-container {
+                display: flex;
+                justify-content: space-between;
+            }
+            .weekLayout-column {
+                width: 14%;
+                margin: 3px;
+            }
+            .weekLayout-column-border {
+                width: 100%;
+                border: 1px solid #f7b4b49a;
+                border-radius: 5px;
+            }
+
+            .weekLayout-hour_container {
+                border-bottom: 1px solid #f7b4b49a;
+                height: 20px;
+                font-family: 'Lato', sans-serif;
+                font-size: 7px;
+                color: rgb(248, 173, 129);
+                padding-top: 5px;
+                padding-left: 5px;
+            }
+        }
     }
 
     /* WEEK */
@@ -342,6 +409,7 @@ $button-active-blue: #bfd2f0;
 
     .aside-container {
         border: 1px solid white;
+        box-shadow: 0px 2px 5px #c7c7c7;
         border-radius: 10px;
         background-image: linear-gradient(
             to bottom,
@@ -370,19 +438,54 @@ $button-active-blue: #bfd2f0;
             padding: 10px 20px;
             margin: 5px;
         }
-        #appt {
+        .appt {
             padding: 8px;
         }
+        form span {
+            color: white;
+        }
+        .time_addBtn {
+            display: flex;
+            justify-content: space-between;
+        }
         #newTodoBtn {
-            color: #777;
-            background-color: #ffffff;
-            border: 2px solid white;
-            border-radius: 100px;
-            font-size: 20px;
-            margin: auto 0px;
+            border: 1px solid #ffffffc9;
+            width: 20%;
+            border-radius: 5px;
+            background-color: rgb(242, 106, 113);
+            color: white;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin: 4px 10px;
+            &:hover {
+                box-shadow: 0 3px 6px $google-blue;
+            }
+            &:active {
+                background-color: rgba(242, 106, 113, 0.413);
+            }
+        }
+        #newTodoInput {
+            width: 86%;
         }
         #newNoteInput {
-            width: 70%;
+            width: 60%;
+        }
+        #newNoteBtn {
+            border: 1px solid #ffffffc9;
+            width: 20%;
+            border-radius: 5px;
+            background-color: rgb(242, 106, 113);
+            color: white;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 10px 20px;
+            margin: 5px;
+            &:hover {
+                box-shadow: 0 3px 6px $google-blue;
+            }
+            &:active {
+                background-color: rgba(242, 106, 113, 0.413);
+            }
         }
     }
 
@@ -397,8 +500,18 @@ $button-active-blue: #bfd2f0;
         cursor: pointer;
         border-radius: 5px;
     }
+    .todo-text {
+        width: 45%;
+        white-space: nowrap;
+        overflow: scroll;
+    }
     .todo-time_date {
-        font-size: 0.8rem;
+        font-size: 0.7rem;
+        white-space: nowrap;
+        overflow: scroll;
+    }
+    .time-dash {
+        margin: 0 2px;
     }
     .reminder {
         text-decoration: line-through;
@@ -416,7 +529,7 @@ $button-active-blue: #bfd2f0;
     .todo-click-box {
         display: flex;
         justify-content: space-between;
-        width: 85%;
+        width: 90%;
     }
     .alltodos-container {
         height: 600px;
@@ -703,6 +816,7 @@ $button-active-blue: #bfd2f0;
         align-items: center;
     }
     .header-calendar-icon {
+        display: none;
         font-size: 35px;
         color: rgb(248, 173, 129);
         &:hover {
@@ -718,6 +832,80 @@ $button-active-blue: #bfd2f0;
     .calendar-container {
         width: 65%;
         height: 100%;
+    }
+
+    /* WEEK LAYOUT*/
+    .weekLayout-changeWeek {
+        display: flex;
+
+        h2 {
+            font-family: 'Lato', sans-serif;
+            letter-spacing: 2px;
+            font-size: 20px;
+            color: rgba(241, 136, 139, 0.747);
+            margin: auto 20px;
+        }
+        .header-arrow {
+            font-size: 20px;
+            color: rgb(241, 136, 139);
+            height: 40px;
+            margin: auto 10px;
+        }
+    }
+
+    #colorHourDiv {
+        background-color: #77777756;
+        color: black;
+    }
+    .weekLayout {
+        width: 100%;
+        height: 100%;
+
+        .weekLayout-container {
+            width: 100%;
+            margin-top: 20px;
+            .weekLayout-weekdays {
+                width: 100%;
+                display: flex;
+                justify-content: space-around;
+                font-family: 'Lato', sans-serif;
+                text-transform: uppercase;
+                color: rgb(248, 173, 129);
+            }
+            .weekLayout-weekdays_day {
+                width: 14%;
+                text-align: center;
+            }
+            .weekLayout-dates {
+                text-align: center;
+                font-family: 'Lato', sans-serif;
+                text-transform: uppercase;
+                color: rgb(248, 173, 129);
+            }
+            .weekLayout-column-container {
+                display: flex;
+                justify-content: space-between;
+            }
+            .weekLayout-column {
+                width: 14%;
+                margin: 5px;
+            }
+            .weekLayout-column-border {
+                width: 100%;
+                border: 1px solid #f7b4b49a;
+                border-radius: 5px;
+            }
+
+            .weekLayout-hour_container {
+                border-bottom: 1px solid #f7b4b49a;
+                height: 30px;
+                font-family: 'Lato', sans-serif;
+                font-size: 11px;
+                color: rgb(248, 173, 129);
+                padding-top: 5px;
+                padding-left: 5px;
+            }
+        }
     }
 
     /* WEEK */
@@ -833,6 +1021,7 @@ $button-active-blue: #bfd2f0;
 
     .aside-container {
         border: 1px solid white;
+        box-shadow: 0px 2px 5px #c7c7c7;
         border-radius: 10px;
         background-image: linear-gradient(
             to bottom,
@@ -861,19 +1050,54 @@ $button-active-blue: #bfd2f0;
             padding: 10px 20px;
             margin: 5px;
         }
-        #appt {
+        .appt {
             padding: 8px;
         }
+        form span {
+            color: white;
+        }
+        .time_addBtn {
+            display: flex;
+            justify-content: space-between;
+        }
         #newTodoBtn {
-            color: #777;
-            background-color: #ffffff;
-            border: 2px solid white;
-            border-radius: 100px;
-            font-size: 20px;
-            margin: auto 0px;
+            border: 1px solid #ffffffc9;
+            width: 20%;
+            border-radius: 5px;
+            background-color: rgb(242, 106, 113);
+            color: white;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin: 4px 10px;
+            &:hover {
+                box-shadow: 0 3px 6px $google-blue;
+            }
+            &:active {
+                background-color: rgba(242, 106, 113, 0.413);
+            }
+        }
+        #newTodoInput {
+            width: 86%;
         }
         #newNoteInput {
-            width: 70%;
+            width: 60%;
+        }
+        #newNoteBtn {
+            border: 1px solid #ffffffc9;
+            width: 20%;
+            border-radius: 5px;
+            background-color: rgb(242, 106, 113);
+            color: white;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 10px 20px;
+            margin: 5px;
+            &:hover {
+                box-shadow: 0 3px 6px $google-blue;
+            }
+            &:active {
+                background-color: rgba(242, 106, 113, 0.413);
+            }
         }
     }
 
@@ -888,8 +1112,18 @@ $button-active-blue: #bfd2f0;
         cursor: pointer;
         border-radius: 5px;
     }
+    .todo-text {
+        width: 50%;
+        white-space: nowrap;
+        overflow: scroll;
+    }
     .todo-time_date {
-        font-size: 0.8rem;
+        font-size: 0.7rem;
+        white-space: nowrap;
+        overflow: scroll;
+    }
+    .time-dash {
+        margin: 0 2px;
     }
     .reminder {
         text-decoration: line-through;
@@ -906,7 +1140,7 @@ $button-active-blue: #bfd2f0;
     .todo-click-box {
         display: flex;
         justify-content: space-between;
-        width: 85%;
+        width: 90%;
     }
     .alltodos-container {
         height: 600px;

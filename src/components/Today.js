@@ -4,7 +4,6 @@ import { BiCheck, BiTrash } from 'react-icons/bi';
 
 function Today({ clickedDay, todos, onDelete, onToggle, editTodo }) {
     let formatDate = moment(clickedDay, 'DD-MM-YYYY').format('D MMMM YY');
-
     if (todos === undefined) {
         return <div className='aside-container loading'>Loading...</div>;
     } else {
@@ -27,11 +26,26 @@ function Today({ clickedDay, todos, onDelete, onToggle, editTodo }) {
                                         editTodo(todo);
                                     }}
                                 >
-                                    {todo.text}
-                                    {'  '}
-                                    <span className='todo-time_date'>
-                                        {todo.time}
+                                    <span className='todo-text'>
+                                        {todo.text}
                                     </span>
+                                    {'  '}
+                                    <div className='time-flex'>
+                                        <span className='todo-time_date'>
+                                            {todo.time}{' '}
+                                        </span>
+                                        <span className='todo-time_date'>
+                                            {!todo.timeTo ||
+                                            todo.timeTo === '' ? (
+                                                ' '
+                                            ) : (
+                                                <span className='time-dash'>
+                                                    -
+                                                </span>
+                                            )}
+                                            {todo.timeTo}
+                                        </span>
+                                    </div>
                                     <span className='todo-time_date'>
                                         {todo.date}
                                     </span>

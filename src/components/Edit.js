@@ -27,6 +27,7 @@ function Edit({ todo, updatedTodo, closeEdit }) {
 
     const onSubmit = (e) => {
         e.preventDefault();
+        console.log(theTodo);
         updatedTodo(theTodo);
     };
 
@@ -45,6 +46,12 @@ function Edit({ todo, updatedTodo, closeEdit }) {
                     value={theTodo.time}
                     onChange={onChange}
                     id='time'
+                />
+                <input
+                    type='time'
+                    value={theTodo.timeTo}
+                    onChange={onChange}
+                    id='timeTo'
                 />
                 <br />
 

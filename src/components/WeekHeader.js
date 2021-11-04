@@ -1,31 +1,30 @@
-import moment from 'moment';
 import React, { useState } from 'react';
-import {
-    BiChevronLeft,
-    BiChevronRight,
-    BiCalendarWeek,
-    BiCalendar,
-} from 'react-icons/bi';
 
-function Header(month) {
+import { BiChevronLeft, BiChevronRight, BiCalendar } from 'react-icons/bi';
+
+function WeekHeader({
+    week,
+    changeWeek,
+    weekLayoutHandler,
+    user,
+    logOutHandler,
+}) {
     let [weekLayout, setWeekLayout] = useState(false);
 
-    let formatMonth = moment(month.month, 'MM-YYYY').format('MMMM YYYY');
-
     const back = () => {
-        month.changeMonth('back');
+        changeWeek('back');
     };
 
     const forward = () => {
-        month.changeMonth('forward');
+        changeWeek('forward');
     };
 
     const changeLayout = () => {
         setWeekLayout(!weekLayout);
-        month.weekLayoutHandler('change');
+        weekLayoutHandler('change');
     };
 
-    let myStr = month.user;
+    let myStr = user;
     let firstName = myStr.split(' ')[0];
 
     return (
@@ -33,12 +32,11 @@ function Header(month) {
             <div className='header-name_btn'>
                 <div className='header-username'>{firstName}</div>
                 <div className='header-icon_btn'>
-                    <BiCalendarWeek
+                    <BiCalendar
                         className='header-calendar-icon'
                         onClick={changeLayout}
                     />
-
-                    <button onClick={month.logOutHandler} className='logOutBtn'>
+                    <button onClick={logOutHandler} className='logOutBtn'>
                         Sign out
                     </button>
                 </div>
@@ -49,7 +47,7 @@ function Header(month) {
                     onClick={back}
                     className='header-arrow'
                 />
-                <h1>{formatMonth}</h1>
+                <h1>Week {week}</h1>
                 <BiChevronRight
                     type='submit'
                     onClick={forward}
@@ -60,4 +58,4 @@ function Header(month) {
     );
 }
 
-export default Header;
+export default WeekHeader;

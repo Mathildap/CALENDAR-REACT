@@ -13,6 +13,7 @@ import Edit from './components/Edit';
 import { auth } from './Firebase/firebase';
 import { signOut } from 'firebase/auth';
 import WeekLayout from './components/WeekLayout';
+import WeekHeader from './components/WeekHeader';
 
 moment.updateLocale('sv', {
     week: {
@@ -194,6 +195,21 @@ function App() {
 
     // - - - - -  - -  WEEK LAYOUT - - - -  - - - //
     let [weekLayout, setWeekLayout] = useState(false);
+    let [week, setWeek] = useState(moment().format('W YYYY'));
+    let [weekDates, setWeekDates] = useState();
+
+    useEffect(() => {
+        let startOfWeek = moment(week, 'W YYYY').startOf('isoWeek');
+        let endOfWeek = moment(week, 'W YYYY').endOf('isoWeek');
+
+        let dayss = [];
+        let day = startOfWeek;
+        while (day <= endOfWeek) {
+            dayss.push(moment(day).format('DD'));
+            day = day.clone().add(1, 'd');
+        }
+        setWeekDates(dayss);
+    }, [week]);
 
     const weekLayoutHandler = (change) => {
         if (weekLayout) {
@@ -201,6 +217,29 @@ function App() {
         } else {
             setWeekLayout(!weekLayout);
         }
+    };
+
+    // CHANGE MONTH
+    const changeWeek = (changeWeek) => {
+        if (changeWeek === 'back') {
+            let newWeek = minusWeek(week);
+            setWeek(newWeek);
+        } else if (changeWeek === 'forward') {
+            let newWeek = plusWeek(week);
+            setWeek(newWeek);
+        }
+    };
+
+    let minusWeek = (cWeek) => {
+        let newWeek = moment(cWeek, 'W').add(-1, 'week').format('W YYYY');
+        setWeek(newWeek);
+        return newWeek;
+    };
+
+    let plusWeek = (cWeek) => {
+        let newWeek = moment(cWeek, 'W').add(1, 'week').format('W YYYY');
+        setWeek(newWeek);
+        return newWeek;
     };
 
     // - - - - -  - -  TODOS - - - -  - - - //
@@ -212,6 +251,7 @@ function App() {
             userId: user.id,
             text: todo.text,
             time: todo.time,
+            timeTo: todo.timeTo,
             date: newTodoDay,
             done: false,
         };
@@ -224,19 +264,6 @@ function App() {
             .then((resp) => resp.json())
             .then((jsonRes) => setTodos(jsonRes));
     };
-
-    // GET TODOS FROM DB
-    // useEffect(() => {
-    //     let userId = user.id;
-
-    //     fetch('https://calendar-backend-mathildap.herokuapp.com/get', {
-    //         method: 'post',
-    //         headers: { 'Content-type': 'application/json' },
-    //         body: JSON.stringify({ userId }),
-    //     })
-    //         .then((res) => res.json())
-    //         .then((jsonRes) => setTodos(jsonRes));
-    // }, [user]);
 
     // GET TODOS FROM DB
     useEffect(() => {
@@ -385,55 +412,102 @@ function App() {
                 />
             ) : (
                 <>
-                    <Header
-                        month={monthInNr}
-                        changeMonth={changeMonth}
-                        user={user.userName}
-                        logOutHandler={logOutHandler}
-                        weekLayoutHandler={weekLayoutHandler}
-                    />
-                    <section className='main-container'>
-                        {weekLayout ? (
-                            <WeekLayout />
-                        ) : (
-                            <Calendar
-                                monthInNr={monthInNr}
-                                days={days}
-                                api={api}
-                                firstDayOfMonth={emptyDays}
-                                clickedDay={choosedDay}
-                                todos={todos}
-                                onDelete={deleteTask}
-                                onToggle={toggleReminder}
+                    {weekLayout ? (
+                        <>
+                            <WeekHeader
+                                changeWeek={changeWeek}
+                                week={week}
+                                weekLayoutHandler={weekLayoutHandler}
+                                user={user.userName}
+                                logOutHandler={logOutHandler}
                             />
-                        )}
-
-                        <aside>
-                            <div className='aside-container'>
-                                <Today
-                                    clickedDay={clickedDay}
+                            <section className='main-container'>
+                                <WeekLayout
+                                    weekDates={weekDates}
+                                    todos={todos}
+                                    monthInNr={monthInNr}
+                                />
+                                <aside>
+                                    <div className='aside-container'>
+                                        <Today
+                                            clickedDay={clickedDay}
+                                            todos={todos}
+                                            onDelete={deleteTask}
+                                            onToggle={toggleReminder}
+                                            editTodo={editTodo}
+                                        />
+                                        <NewTodo
+                                            clickedDay={clickedDay}
+                                            inputToDo={sendTodo}
+                                        />
+                                    </div>
+                                    <div className='aside-container'>
+                                        <Notes
+                                            notes={notes}
+                                            onDelete={deleteNote}
+                                        />
+                                        <NewNote newNote={newNote} />
+                                    </div>
+                                    <AllTodos
+                                        todos={todos}
+                                        onDelete={deleteTask}
+                                        onToggle={toggleReminder}
+                                        editTodo={editTodo}
+                                    />
+                                </aside>
+                            </section>
+                        </>
+                    ) : (
+                        <>
+                            <Header
+                                month={monthInNr}
+                                changeMonth={changeMonth}
+                                user={user.userName}
+                                logOutHandler={logOutHandler}
+                                weekLayoutHandler={weekLayoutHandler}
+                            />
+                            <section className='main-container'>
+                                <Calendar
+                                    monthInNr={monthInNr}
+                                    days={days}
+                                    api={api}
+                                    firstDayOfMonth={emptyDays}
+                                    clickedDay={choosedDay}
                                     todos={todos}
                                     onDelete={deleteTask}
                                     onToggle={toggleReminder}
-                                    editTodo={editTodo}
                                 />
-                                <NewTodo
-                                    clickedDay={clickedDay}
-                                    inputToDo={sendTodo}
-                                />
-                            </div>
-                            <div className='aside-container'>
-                                <Notes notes={notes} onDelete={deleteNote} />
-                                <NewNote newNote={newNote} />
-                            </div>
-                            <AllTodos
-                                todos={todos}
-                                onDelete={deleteTask}
-                                onToggle={toggleReminder}
-                                editTodo={editTodo}
-                            />
-                        </aside>
-                    </section>
+                                <aside>
+                                    <div className='aside-container'>
+                                        <Today
+                                            clickedDay={clickedDay}
+                                            todos={todos}
+                                            onDelete={deleteTask}
+                                            onToggle={toggleReminder}
+                                            editTodo={editTodo}
+                                        />
+                                        <NewTodo
+                                            clickedDay={clickedDay}
+                                            inputToDo={sendTodo}
+                                        />
+                                    </div>
+                                    <div className='aside-container'>
+                                        <Notes
+                                            notes={notes}
+                                            onDelete={deleteNote}
+                                        />
+                                        <NewNote newNote={newNote} />
+                                    </div>
+                                    <AllTodos
+                                        todos={todos}
+                                        onDelete={deleteTask}
+                                        onToggle={toggleReminder}
+                                        editTodo={editTodo}
+                                    />
+                                </aside>
+                            </section>
+                        </>
+                    )}
                     {todoEdit === '' ? (
                         ''
                     ) : (

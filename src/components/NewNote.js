@@ -26,8 +26,8 @@ function NewNote({ newNote }) {
                     id='newNoteInput'
                     required
                 />
-                <button type='submit' id='newTodoBtn'>
-                    +
+                <button type='submit' id='newNoteBtn'>
+                    add
                 </button>
             </form>
         </div>
